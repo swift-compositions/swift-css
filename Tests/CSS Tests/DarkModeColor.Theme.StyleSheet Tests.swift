@@ -13,12 +13,10 @@ import Testing
 
 extension DarkModeColor.Theme.StyleSheet {
     @Suite
-    struct `Edge Case` {
+    struct `Translucent Variables Stay Valid CSS` {
 
         @Test
-        func
-            `translucent variables stay valid CSS for the default theme's 3-digit hex shorthand white`()
-        {
+        func `the default theme's 3-digit hex shorthand white`() {
             let theme = DarkModeColor.Theme.default
             let css = theme.stylesheet.description
 
@@ -30,7 +28,7 @@ extension DarkModeColor.Theme.StyleSheet {
         }
 
         @Test
-        func `translucent variables stay valid CSS for rgba base colors`() {
+        func `rgba base colors`() {
             var theme = DarkModeColor.Theme.default
             theme.gray = DarkModeColor(
                 light: .rgba(10, 20, 30, 0.5),
@@ -45,7 +43,7 @@ extension DarkModeColor.Theme.StyleSheet {
         }
 
         @Test
-        func `translucent variables stay valid CSS for named base colors`() {
+        func `named base colors`() {
             var theme = DarkModeColor.Theme.default
             theme.blue = DarkModeColor(light: .named(.blue), dark: .named(.navy))
             let css = theme.stylesheet.description
