@@ -16,7 +16,9 @@ extension DarkModeColor.Theme.StyleSheet {
     struct `Edge Case` {
 
         @Test
-        func `translucent variables stay valid CSS for the default theme's 3-digit hex shorthand white`() {
+        func
+            `translucent variables stay valid CSS for the default theme's 3-digit hex shorthand white`()
+        {
             let theme = DarkModeColor.Theme.default
             let css = theme.stylesheet.description
 
