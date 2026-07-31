@@ -257,7 +257,10 @@ extension Font.Defaults {
         do {
             result = .success(try $_scoped.withValue(font, operation: operation))
         } catch {
-            result = .failure(error as! Failure)
+            guard let failure = error as? Failure else {
+                fatalError("TaskLocal.withValue rethrew an error that was not \(Failure.self); operation is the sole throwing source and is typed throws(Failure), so this invariant should be unreachable.")
+            }
+            result = .failure(failure)
         }
         return try result.get()
     }
@@ -277,7 +280,10 @@ extension Font.Defaults {
         do {
             result = .success(try await $_scoped.withValue(font, operation: operation))
         } catch {
-            result = .failure(error as! Failure)
+            guard let failure = error as? Failure else {
+                fatalError("TaskLocal.withValue rethrew an error that was not \(Failure.self); operation is the sole throwing source and is typed throws(Failure), so this invariant should be unreachable.")
+            }
+            result = .failure(failure)
         }
         return try result.get()
     }
