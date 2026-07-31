@@ -32,28 +32,28 @@ extension HTML.CSS {
     ) -> HTML.CSS<some HTML.View> {
         var result = HTML.AnyView(base)
 
-        if let column = column {
+        if let column {
             result = HTML.AnyView(result.inlineStyle(column))
         }
-        if let row = row {
+        if let row {
             result = HTML.AnyView(result.inlineStyle(row))
         }
-        if let columnStart = columnStart {
+        if let columnStart {
             result = HTML.AnyView(result.inlineStyle(columnStart))
         }
-        if let columnEnd = columnEnd {
+        if let columnEnd {
             result = HTML.AnyView(result.inlineStyle(columnEnd))
         }
-        if let rowStart = rowStart {
+        if let rowStart {
             result = HTML.AnyView(result.inlineStyle(rowStart))
         }
-        if let rowEnd = rowEnd {
+        if let rowEnd {
             result = HTML.AnyView(result.inlineStyle(rowEnd))
         }
-        if let justifySelf = justifySelf {
+        if let justifySelf {
             result = HTML.AnyView(result.inlineStyle(justifySelf))
         }
-        if let alignSelf = alignSelf {
+        if let alignSelf {
             result = HTML.AnyView(result.inlineStyle(alignSelf))
         }
 

@@ -34,25 +34,25 @@ extension HTML.CSS {
     ) -> HTML.CSS<some HTML.View> {
         var result = HTML.AnyView(base.inlineStyle(Display.grid))
 
-        if let columns = columns {
+        if let columns {
             result = HTML.AnyView(result.inlineStyle(columns))
         }
-        if let rows = rows {
+        if let rows {
             result = HTML.AnyView(result.inlineStyle(rows))
         }
-        if let gap = gap {
+        if let gap {
             result = HTML.AnyView(result.inlineStyle(gap))
         }
-        if let rowGap = rowGap {
+        if let rowGap {
             result = HTML.AnyView(result.inlineStyle(rowGap))
         }
-        if let columnGap = columnGap {
+        if let columnGap {
             result = HTML.AnyView(result.inlineStyle(columnGap))
         }
-        if let justifyItems = justifyItems {
+        if let justifyItems {
             result = HTML.AnyView(result.inlineStyle(justifyItems))
         }
-        if let alignItems = alignItems {
+        if let alignItems {
             result = HTML.AnyView(result.inlineStyle(alignItems))
         }
 

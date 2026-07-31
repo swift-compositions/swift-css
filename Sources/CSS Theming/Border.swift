@@ -26,4 +26,3 @@ public struct Border: Equatable, Sendable {
         self.sides = sides
     }
 }
-

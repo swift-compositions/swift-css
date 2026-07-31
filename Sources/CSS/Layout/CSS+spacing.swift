@@ -26,10 +26,10 @@ extension HTML.CSS {
     ) -> HTML.CSS<some HTML.View> {
         var result = HTML.AnyView(base)
 
-        if let padding = padding {
+        if let padding {
             result = HTML.AnyView(result.inlineStyle(padding))
         }
-        if let margin = margin {
+        if let margin {
             result = HTML.AnyView(result.inlineStyle(margin))
         }
 

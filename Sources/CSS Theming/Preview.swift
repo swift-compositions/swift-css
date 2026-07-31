@@ -146,12 +146,14 @@
             switch cssColor {
             case .hex(let hexString):
                 return SwiftUI.Color(hex: "\(hexString)")
+
             case .rgb(let red, let green, let blue):
                 return SwiftUI.Color(
                     red: Double(red) / 255.0,
                     green: Double(green) / 255.0,
                     blue: Double(blue) / 255.0
                 )
+
             case .rgba(let red, let green, let blue, let alpha):
                 return SwiftUI.Color(
                     red: Double(red) / 255.0,
@@ -159,8 +161,10 @@
                     blue: Double(blue) / 255.0,
                     opacity: alpha
                 )
+
             case .transparent:
                 return SwiftUI.Color.clear
+
             default:
                 // Fallback for other color types
                 return SwiftUI.Color.gray
@@ -181,10 +185,13 @@
             switch hex.count {
             case 3:  // RGB (12-bit)
                 (a, r, g, b) = (255, (int >> 8) * 17, (int >> 4 & 0xF) * 17, (int & 0xF) * 17)
+
             case 6:  // RGB (24-bit)
                 (a, r, g, b) = (255, int >> 16, int >> 8 & 0xFF, int & 0xFF)
+
             case 8:  // ARGB (32-bit)
                 (a, r, g, b) = (int >> 24, int >> 16 & 0xFF, int >> 8 & 0xFF, int & 0xFF)
+
             default:
                 (a, r, g, b) = (255, 0, 0, 0)
             }

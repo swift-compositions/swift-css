@@ -16,6 +16,7 @@ extension CSS_Standard.Color {
         switch self {
         case .color(let color):
             return .color(color.opacity(alpha))
+
         case .global:
             return self
         }
@@ -29,6 +30,7 @@ extension CSS_Standard.Color {
         switch self {
         case .color(let color):
             return .color(color.darker(by: percent))
+
         case .global:
             return self
         }
@@ -42,6 +44,7 @@ extension CSS_Standard.Color {
         switch self {
         case .color(let color):
             return .color(color.lighter(by: percent))
+
         case .global:
             return self
         }
@@ -55,6 +58,7 @@ extension CSS_Standard.Color {
         switch self {
         case .color(let color):
             return .color(color.adjustBrightness(by: percent))
+
         case .global:
             return self
         }

@@ -31,22 +31,22 @@ extension HTML.CSS {
     ) -> HTML.CSS<some HTML.View> {
         var result = HTML.AnyView(base)
 
-        if let width = width {
+        if let width {
             result = HTML.AnyView(result.inlineStyle(width))
         }
-        if let height = height {
+        if let height {
             result = HTML.AnyView(result.inlineStyle(height))
         }
-        if let minWidth = minWidth {
+        if let minWidth {
             result = HTML.AnyView(result.inlineStyle(minWidth))
         }
-        if let minHeight = minHeight {
+        if let minHeight {
             result = HTML.AnyView(result.inlineStyle(minHeight))
         }
-        if let maxWidth = maxWidth {
+        if let maxWidth {
             result = HTML.AnyView(result.inlineStyle(maxWidth))
         }
-        if let maxHeight = maxHeight {
+        if let maxHeight {
             result = HTML.AnyView(result.inlineStyle(maxHeight))
         }
 

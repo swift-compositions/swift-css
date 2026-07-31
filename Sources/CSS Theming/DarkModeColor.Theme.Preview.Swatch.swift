@@ -28,10 +28,13 @@
             switch cssColor {
             case .hex(let value):
                 return "#\(value)"
+
             case .rgb(let r, let g, let b):
                 return String(format: "#%02X%02X%02X", Int(r), Int(g), Int(b))
+
             case .rgba(let r, let g, let b, let a):
                 return String(format: "#%02X%02X%02X%02X", Int(r), Int(g), Int(b), Int(a * 255))
+
             default:
                 return cssColor.description
             }

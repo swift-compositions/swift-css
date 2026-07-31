@@ -25,6 +25,7 @@ extension HTML.CSS {
             self
                 .listStyle(CSS_Standard.ListStyle.none)
                 .paddingLeft(.zero)
+
         case .cssPropertyTypesListStyle(let cssListStyle):
             self
                 .listStyle(cssListStyle)

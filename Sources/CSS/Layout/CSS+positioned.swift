@@ -32,19 +32,19 @@ extension HTML.CSS {
     ) -> HTML.CSS<some HTML.View> {
         var result = HTML.AnyView(base.inlineStyle(position))
 
-        if let top = top {
+        if let top {
             result = HTML.AnyView(result.inlineStyle(top))
         }
-        if let right = right {
+        if let right {
             result = HTML.AnyView(result.inlineStyle(right))
         }
-        if let bottom = bottom {
+        if let bottom {
             result = HTML.AnyView(result.inlineStyle(bottom))
         }
-        if let left = left {
+        if let left {
             result = HTML.AnyView(result.inlineStyle(left))
         }
-        if let zIndex = zIndex {
+        if let zIndex {
             result = HTML.AnyView(result.inlineStyle(zIndex))
         }
 
