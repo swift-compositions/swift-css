@@ -6,29 +6,11 @@
 //
 
 import CSS
-import Foundation
 
 extension DarkModeColor.Theme {
     /// Generates a CSS stylesheet with all theme colors as CSS custom properties
     public var stylesheet: StyleSheet {
         DarkModeColor.Theme.StyleSheet(theme: self)
-    }
-}
-
-extension DarkModeColor.Theme.StyleSheet {
-    public func write(to directory: String, name: String = "theme") throws {
-
-        try FileManager.default.createDirectory(
-            atPath: directory,
-            withIntermediateDirectories: true,
-            attributes: nil
-        )
-
-        try self.description.write(
-            toFile: directory + "\(name).css",
-            atomically: true,
-            encoding: .utf8
-        )
     }
 }
 

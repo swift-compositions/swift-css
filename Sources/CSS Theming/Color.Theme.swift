@@ -55,199 +55,6 @@ extension DarkModeColor.Theme {
     }
 }
 
-extension DarkModeColor.Theme {
-    public struct Text: Sendable {
-        public var primary: DarkModeColor
-        public var secondary: DarkModeColor
-        public var tertiary: DarkModeColor
-
-        public var link: DarkModeColor
-        public var linkHover: DarkModeColor
-        public var button: DarkModeColor
-
-        public var error: DarkModeColor
-        public var success: DarkModeColor
-        public var warning: DarkModeColor
-        public var info: DarkModeColor
-        public var neutral: DarkModeColor
-
-        public var inverted: DarkModeColor
-        public var disabled: DarkModeColor
-
-        public init(
-            primary: DarkModeColor,
-            secondary: DarkModeColor,
-            tertiary: DarkModeColor,
-            link: DarkModeColor,
-            linkHover: DarkModeColor? = nil,
-            button: DarkModeColor,
-            error: DarkModeColor,
-            success: DarkModeColor,
-            warning: DarkModeColor,
-            info: DarkModeColor? = nil,
-            neutral: DarkModeColor? = nil,
-            inverted: DarkModeColor,
-            disabled: DarkModeColor
-        ) {
-            self.primary = primary
-            self.secondary = secondary
-            self.tertiary = tertiary
-            self.link = link
-            self.linkHover = linkHover ?? link
-            self.button = button
-            self.error = error
-            self.success = success
-            self.warning = warning
-            self.info = info ?? link
-            self.neutral = neutral ?? secondary
-            self.inverted = inverted
-            self.disabled = disabled
-        }
-    }
-}
-
-extension DarkModeColor.Theme {
-    public struct Background: Sendable {
-        public var primary: DarkModeColor
-        public var secondary: DarkModeColor
-        public var tertiary: DarkModeColor
-
-        public var elevated: DarkModeColor
-        public var grouped: DarkModeColor
-
-        public var selected: DarkModeColor
-        public var highlighted: DarkModeColor
-
-        public var button: DarkModeColor
-        public var buttonHover: DarkModeColor
-
-        public var error: DarkModeColor
-        public var errorMuted: DarkModeColor
-        public var success: DarkModeColor
-        public var successMuted: DarkModeColor
-        public var warning: DarkModeColor
-        public var warningMuted: DarkModeColor
-        public var info: DarkModeColor
-        public var infoMuted: DarkModeColor
-        public var neutral: DarkModeColor
-
-        public init(
-            primary: DarkModeColor,
-            secondary: DarkModeColor,
-            tertiary: DarkModeColor,
-            elevated: DarkModeColor,
-            grouped: DarkModeColor,
-            selected: DarkModeColor,
-            highlighted: DarkModeColor,
-            button: DarkModeColor,
-            buttonHover: DarkModeColor? = nil,
-            error: DarkModeColor,
-            errorMuted: DarkModeColor? = nil,
-            success: DarkModeColor,
-            successMuted: DarkModeColor? = nil,
-            warning: DarkModeColor,
-            warningMuted: DarkModeColor? = nil,
-            info: DarkModeColor? = nil,
-            infoMuted: DarkModeColor? = nil,
-            neutral: DarkModeColor? = nil
-        ) {
-            self.primary = primary
-            self.secondary = secondary
-            self.tertiary = tertiary
-            self.elevated = elevated
-            self.grouped = grouped
-            self.selected = selected
-            self.highlighted = highlighted
-            self.button = button
-            self.buttonHover = buttonHover ?? button
-            self.error = error
-            self.errorMuted = errorMuted ?? error
-            self.success = success
-            self.successMuted = successMuted ?? success
-            self.warning = warning
-            self.warningMuted = warningMuted ?? warning
-            self.info = info ?? highlighted
-            self.infoMuted = infoMuted ?? highlighted
-            self.neutral = neutral ?? secondary
-        }
-    }
-}
-
-extension DarkModeColor.Theme {
-    public struct Border: Sendable {
-        public var primary: DarkModeColor
-        public var secondary: DarkModeColor
-        public var tertiary: DarkModeColor
-
-        public var selected: DarkModeColor
-        public var highlighted: DarkModeColor
-        public var hover: DarkModeColor
-
-        public var button: DarkModeColor
-
-        public var error: DarkModeColor
-        public var success: DarkModeColor
-        public var warning: DarkModeColor
-        public var info: DarkModeColor
-        public var infoMuted: DarkModeColor
-        public var neutral: DarkModeColor
-
-        public init(
-            primary: DarkModeColor,
-            secondary: DarkModeColor,
-            tertiary: DarkModeColor,
-            selected: DarkModeColor,
-            highlighted: DarkModeColor,
-            hover: DarkModeColor? = nil,
-            button: DarkModeColor,
-            error: DarkModeColor,
-            success: DarkModeColor,
-            warning: DarkModeColor,
-            info: DarkModeColor? = nil,
-            infoMuted: DarkModeColor? = nil,
-            neutral: DarkModeColor? = nil
-        ) {
-            self.primary = primary
-            self.secondary = secondary
-            self.tertiary = tertiary
-            self.selected = selected
-            self.highlighted = highlighted
-            self.hover = hover ?? highlighted
-            self.button = button
-            self.error = error
-            self.success = success
-            self.warning = warning
-            self.info = info ?? highlighted
-            self.infoMuted = infoMuted ?? highlighted
-            self.neutral = neutral ?? secondary
-        }
-    }
-}
-
-extension DarkModeColor.Theme {
-    public struct Branding: Sendable {
-        public var primary: DarkModeColor
-        public var secondary: DarkModeColor
-        public var accent: DarkModeColor
-        public var primarySubtle: DarkModeColor
-        public var secondarySubtle: DarkModeColor
-
-        public init(
-            primary: DarkModeColor,
-            secondary: DarkModeColor,
-            accent: DarkModeColor,
-            primarySubtle: DarkModeColor,
-            secondarySubtle: DarkModeColor
-        ) {
-            self.primary = primary
-            self.secondary = secondary
-            self.accent = accent
-            self.primarySubtle = primarySubtle
-            self.secondarySubtle = secondarySubtle
-        }
-    }
-}
-
 extension DarkModeColor {
     public static var theme: DarkModeColor.Theme {
         DarkModeColor.Theme.current
@@ -322,20 +129,42 @@ extension DarkModeColor.Theme {
     ///     // Code here sees .github theme
     /// }
     /// ```
-    public static func withValue<R>(
+    public static func withValue<R, Failure: Swift.Error>(
         _ theme: DarkModeColor.Theme,
-        operation: () throws -> R
-    ) rethrows -> R {
-        try $_scoped.withValue(theme, operation: operation)
+        operation: () throws(Failure) -> R
+    ) throws(Failure) -> R {
+        // `TaskLocal.withValue` is untyped `rethrows`, so the error is bridged back
+        // to `Failure` explicitly; `operation` is the sole throwing source, so the
+        // downcast always succeeds.
+        let result: Result<R, Failure>
+        // swift-linter:disable:next do throws for typed catch
+        // REASON: Synchronization.TaskLocal.withValue(_:operation:) is a cross-module
+        // stdlib API declared untyped `rethrows`; there is no `E` to name in `do throws(E)`.
+        do {
+            result = .success(try $_scoped.withValue(theme, operation: operation))
+        } catch {
+            result = .failure(error as! Failure)
+        }
+        return try result.get()
     }
 
     /// Execute an async operation with a custom theme.
     nonisolated(nonsending)
-        public static func withValue<R>(
+        public static func withValue<R, Failure: Swift.Error>(
             _ theme: DarkModeColor.Theme,
-            operation: nonisolated(nonsending) () async throws -> R
-        ) async rethrows -> R
+            operation: nonisolated(nonsending) () async throws(Failure) -> R
+        ) async throws(Failure) -> R
     {
-        try await $_scoped.withValue(theme, operation: operation)
+        // See the sync overload above for why the error is bridged explicitly.
+        let result: Result<R, Failure>
+        // swift-linter:disable:next do throws for typed catch
+        // REASON: Synchronization.TaskLocal.withValue(_:operation:) is a cross-module
+        // stdlib API declared untyped `rethrows`; there is no `E` to name in `do throws(E)`.
+        do {
+            result = .success(try await $_scoped.withValue(theme, operation: operation))
+        } catch {
+            result = .failure(error as! Failure)
+        }
+        return try result.get()
     }
 }

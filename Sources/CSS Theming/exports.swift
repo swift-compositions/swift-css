@@ -61,27 +61,28 @@ public func prepareDependencies(
 ///     // Code here sees the modified values
 /// }
 /// ```
-public func withDependencies<R>(
+public func withDependencies<R, Failure: Swift.Error>(
     _ modify: (inout ThemingValues) -> Void,
-    operation: () throws -> R
-) rethrows -> R {
+    operation: () throws(Failure) -> R
+) throws(Failure) -> R {
     var values = ThemingValues()
     modify(&values)
-    return try DarkModeColor.Theme.withValue(values.theme) {
+    return try DarkModeColor.Theme.withValue(values.theme) { () throws(Failure) -> R in
         try Font.Defaults.withValue(values.font, operation: operation)
     }
 }
 
 /// Execute an async operation with modified theming values.
 nonisolated(nonsending)
-    public func withDependencies<R>(
+    public func withDependencies<R, Failure: Swift.Error>(
         _ modify: (inout ThemingValues) -> Void,
-        operation: nonisolated(nonsending) () async throws -> R
-    ) async rethrows -> R
+        operation: nonisolated(nonsending) () async throws(Failure) -> R
+    ) async throws(Failure) -> R
 {
     var values = ThemingValues()
     modify(&values)
     return try await DarkModeColor.Theme.withValue(values.theme) {
+        () async throws(Failure) -> R in
         try await Font.Defaults.withValue(values.font, operation: operation)
     }
 }

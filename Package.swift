@@ -40,6 +40,10 @@ let package = Package(
     products: [
         .library(name: .css, targets: [.css]),
         .library(name: .cssTheming, targets: [.cssTheming]),
+        .library(
+            name: "CSS Theming Foundation Integration",
+            targets: ["CSS Theming Foundation Integration"]
+        ),
         .library(name: "CSS Test Support", targets: ["CSS Test Support"]),
     ],
     dependencies: [
@@ -64,6 +68,12 @@ let package = Package(
                 .css,
                 .htmlRendering,
                 .cssStandard,
+            ]
+        ),
+        .target(
+            name: "CSS Theming Foundation Integration",
+            dependencies: [
+                .cssTheming
             ]
         ),
         .target(

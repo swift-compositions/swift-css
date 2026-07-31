@@ -94,10 +94,6 @@ extension Font {
 }
 
 extension Font {
-    public enum BodySize {
-        case small
-        case regular
-    }
     public static func body(_ size: BodySize) -> Font {
         switch size {
         case .small: .caption
@@ -247,20 +243,42 @@ extension Font.Defaults {
     ///     // Code here sees customFont
     /// }
     /// ```
-    public static func withValue<R>(
+    public static func withValue<R, Failure: Swift.Error>(
         _ font: Font.Defaults,
-        operation: () throws -> R
-    ) rethrows -> R {
-        try $_scoped.withValue(font, operation: operation)
+        operation: () throws(Failure) -> R
+    ) throws(Failure) -> R {
+        // `TaskLocal.withValue` is untyped `rethrows`, so the error is bridged back
+        // to `Failure` explicitly; `operation` is the sole throwing source, so the
+        // downcast always succeeds.
+        let result: Result<R, Failure>
+        // swift-linter:disable:next do throws for typed catch
+        // REASON: Synchronization.TaskLocal.withValue(_:operation:) is a cross-module
+        // stdlib API declared untyped `rethrows`; there is no `E` to name in `do throws(E)`.
+        do {
+            result = .success(try $_scoped.withValue(font, operation: operation))
+        } catch {
+            result = .failure(error as! Failure)
+        }
+        return try result.get()
     }
 
     /// Execute an async operation with custom font defaults.
     nonisolated(nonsending)
-        public static func withValue<R>(
+        public static func withValue<R, Failure: Swift.Error>(
             _ font: Font.Defaults,
-            operation: nonisolated(nonsending) () async throws -> R
-        ) async rethrows -> R
+            operation: nonisolated(nonsending) () async throws(Failure) -> R
+        ) async throws(Failure) -> R
     {
-        try await $_scoped.withValue(font, operation: operation)
+        // See the sync overload above for why the error is bridged explicitly.
+        let result: Result<R, Failure>
+        // swift-linter:disable:next do throws for typed catch
+        // REASON: Synchronization.TaskLocal.withValue(_:operation:) is a cross-module
+        // stdlib API declared untyped `rethrows`; there is no `E` to name in `do throws(E)`.
+        do {
+            result = .success(try await $_scoped.withValue(font, operation: operation))
+        } catch {
+            result = .failure(error as! Failure)
+        }
+        return try result.get()
     }
 }

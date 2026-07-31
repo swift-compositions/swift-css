@@ -40,8 +40,17 @@ extension HTML.CSS {
                         if let existingAtRule = ctx.atRule {
                             // Combine with existing media query using Media's and() method
                             let combined = darkMedia.and(
+                                // swift-linter:disable:next raw value access
+                                // REASON: HTML.AtRule (CSS_HTML_Rendering) and
+                                // W3C_CSS_MediaQueries.Media (CSS_Standard) are unrelated
+                                // newtypes declared in separate upstream packages with no
+                                // typed conversion between them; bridging via their shared
+                                // raw String representation is this package's own interop code.
                                 W3C_CSS_MediaQueries.Media(rawValue: existingAtRule.rawValue)
                             )
+                            // swift-linter:disable:next raw value access
+                            // REASON: see above — no typed HTML.AtRule(_: Media) initializer
+                            // exists upstream to construct the combined dark-mode at-rule.
                             return HTML.AtRule(rawValue: combined.rawValue)
                         } else {
                             return HTML.AtRule.Media(darkMedia)
@@ -182,8 +191,17 @@ extension HTML.View {
                     if let existingAtRule = ctx.atRule {
                         // Combine with existing media query using Media's and() method
                         let combined = darkMedia.and(
+                            // swift-linter:disable:next raw value access
+                            // REASON: HTML.AtRule (CSS_HTML_Rendering) and
+                            // W3C_CSS_MediaQueries.Media (CSS_Standard) are unrelated
+                            // newtypes declared in separate upstream packages with no
+                            // typed conversion between them; bridging via their shared
+                            // raw String representation is this package's own interop code.
                             W3C_CSS_MediaQueries.Media(rawValue: existingAtRule.rawValue)
                         )
+                        // swift-linter:disable:next raw value access
+                        // REASON: see above — no typed HTML.AtRule(_: Media) initializer
+                        // exists upstream to construct the combined dark-mode at-rule.
                         return HTML.AtRule(rawValue: combined.rawValue)
                     } else {
                         return HTML.AtRule.Media(darkMedia)

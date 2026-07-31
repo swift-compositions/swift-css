@@ -19,7 +19,7 @@
         var body: some View {
             VStack(alignment: .leading, spacing: 24) {
                 // Base Colors Section
-                ColorSection(
+                Section(
                     title: "Base Colors",
                     colors: [
                         ("Gray", theme.gray),
@@ -38,7 +38,7 @@
                 )
 
                 // Neutral Colors Section
-                ColorSection(
+                Section(
                     title: "Neutral Colors",
                     colors: [
                         ("Black", theme.black),
@@ -52,7 +52,7 @@
                 )
 
                 // Text Colors Section
-                ColorSection(
+                Section(
                     title: "Text Colors",
                     colors: [
                         ("Primary", theme.text.primary),
@@ -73,7 +73,7 @@
                 )
 
                 // Background Colors Section
-                ColorSection(
+                Section(
                     title: "Background Colors",
                     colors: [
                         ("Primary", theme.background.primary),
@@ -99,7 +99,7 @@
                 )
 
                 // Border Colors Section
-                ColorSection(
+                Section(
                     title: "Border Colors",
                     colors: [
                         ("Primary", theme.border.primary),
@@ -120,7 +120,7 @@
                 )
 
                 // Branding Colors Section
-                ColorSection(
+                Section(
                     title: "Branding Colors",
                     colors: [
                         ("Primary", theme.branding.primary),
@@ -196,111 +196,6 @@
                 blue: Double(b) / 255,
                 opacity: Double(a) / 255
             )
-        }
-    }
-
-    /// A section displaying a group of colors
-    struct ColorSection: View {
-        let title: String
-        let colors: [(name: String, color: DarkModeColor)]
-        let colorScheme: SwiftUI.ColorScheme
-
-        private let columns = [
-            GridItem(.adaptive(minimum: 120, maximum: 150), spacing: 12)
-        ]
-    }
-
-    extension ColorSection {
-        var body: some View {
-            VStack(alignment: .leading, spacing: 12) {
-                Text(title)
-                    .font(.headline)
-                    .foregroundColor(.primary)
-
-                LazyVGrid(columns: columns, spacing: 12) {
-                    ForEach(colors, id: \.name) { item in
-                        ColorSwatch(
-                            name: item.name,
-                            htmlColor: item.color,
-                            colorScheme: colorScheme
-                        )
-                    }
-                }
-            }
-        }
-    }
-
-    /// Individual color swatch showing the color and its name
-    struct ColorSwatch: View {
-        let name: String
-        let htmlColor: DarkModeColor
-        let colorScheme: SwiftUI.ColorScheme
-        @State private var isHovering = false
-    }
-
-    extension ColorSwatch {
-        var swiftUIColor: SwiftUI.Color {
-            htmlColor.toSwiftUIColor(for: colorScheme)
-        }
-
-        var hexValue: String {
-            let cssColor = colorScheme == .light ? htmlColor.light : htmlColor.dark
-            switch cssColor {
-            case .hex(let value):
-                return "#\(value)"
-            case .rgb(let r, let g, let b):
-                return String(format: "#%02X%02X%02X", Int(r), Int(g), Int(b))
-            case .rgba(let r, let g, let b, let a):
-                return String(format: "#%02X%02X%02X%02X", Int(r), Int(g), Int(b), Int(a * 255))
-            default:
-                return cssColor.description
-            }
-        }
-
-        var body: some View {
-            VStack(spacing: 6) {
-                RoundedRectangle(cornerRadius: 8)
-                    .fill(swiftUIColor)
-                    .frame(height: 60)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 8)
-                            .strokeBorder(Color.primary.opacity(0.2), lineWidth: 1)
-                    )
-                    .overlay(
-                        Text(isHovering ? hexValue : "")
-                            .font(.caption.monospaced())
-                            .foregroundColor(
-                                // Determine text color based on background brightness
-                                isLightColor(swiftUIColor) ? .black : .white
-                            )
-                            .padding(4)
-                            .background(
-                                isHovering
-                                    ? Color.black.opacity(isLightColor(swiftUIColor) ? 0.1 : 0.3)
-                                    : .clear
-                            )
-                            .cornerRadius(4)
-                            .opacity(isHovering ? 1 : 0)
-                            .animation(.easeInOut(duration: 0.2), value: isHovering)
-                    )
-                    .onHover { hovering in
-                        isHovering = hovering
-                    }
-
-                Text(name)
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-                    .lineLimit(1)
-            }
-        }
-
-        /// Determine if a color is light or dark for text contrast
-        func isLightColor(_ color: SwiftUI.Color) -> Bool {
-            // This is a simplified brightness calculation
-            // In production, you'd want to extract RGB values properly
-            return colorScheme == .light
-                && (htmlColor.light.description.contains("fff")
-                    || htmlColor.light.description.contains("white"))
         }
     }
 
