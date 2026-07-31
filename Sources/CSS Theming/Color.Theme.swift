@@ -144,7 +144,11 @@ extension DarkModeColor.Theme {
             result = .success(try $_scoped.withValue(theme, operation: operation))
         } catch {
             guard let failure = error as? Failure else {
-                fatalError("TaskLocal.withValue rethrew an error that was not \(Failure.self); operation is the sole throwing source and is typed throws(Failure), so this invariant should be unreachable.")
+                fatalError(
+                    "TaskLocal.withValue rethrew an error that was not \(Failure.self); "
+                        + "operation is the sole throwing source and is typed throws(Failure), "
+                        + "so this invariant should be unreachable."
+                )
             }
             result = .failure(failure)
         }
@@ -167,7 +171,11 @@ extension DarkModeColor.Theme {
             result = .success(try await $_scoped.withValue(theme, operation: operation))
         } catch {
             guard let failure = error as? Failure else {
-                fatalError("TaskLocal.withValue rethrew an error that was not \(Failure.self); operation is the sole throwing source and is typed throws(Failure), so this invariant should be unreachable.")
+                fatalError(
+                    "TaskLocal.withValue rethrew an error that was not \(Failure.self); "
+                        + "operation is the sole throwing source and is typed throws(Failure), "
+                        + "so this invariant should be unreachable."
+                )
             }
             result = .failure(failure)
         }
