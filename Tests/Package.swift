@@ -18,7 +18,7 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "CSS Tests Support",
+            name: "CSS Test Support",
             dependencies: [
                 .product(name: "CSS", package: "swift-css"),
                 .product(name: "CSS Theming", package: "swift-css"),
@@ -31,7 +31,7 @@ let package = Package(
         .testTarget(
             name: "CSS Performance Tests",
             dependencies: [
-                "CSS Tests Support",
+                "CSS Test Support",
                 .product(name: "Testing", package: "swift-testing"),
             ],
             path: "CSS Performance Tests"
@@ -39,7 +39,7 @@ let package = Package(
         .testTarget(
             name: "CSS Snapshot Tests",
             dependencies: [
-                "CSS Tests Support",
+                "CSS Test Support",
                 .product(name: "Testing", package: "swift-testing"),
             ],
             path: "CSS Snapshot Tests"
