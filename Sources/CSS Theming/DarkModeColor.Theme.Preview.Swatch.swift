@@ -15,6 +15,16 @@
             let htmlColor: DarkModeColor
             let colorScheme: SwiftUI.ColorScheme
             @State private var isHovering = false
+
+            // Explicit memberwise initializer: the synthesized one would be
+            // `private` because `isHovering` is a private stored property,
+            // making the type uninitializable from sibling files in the
+            // same target (e.g. `DarkModeColor.Theme.Preview.Section`).
+            init(name: String, htmlColor: DarkModeColor, colorScheme: SwiftUI.ColorScheme) {
+                self.name = name
+                self.htmlColor = htmlColor
+                self.colorScheme = colorScheme
+            }
         }
     }
 
@@ -66,9 +76,11 @@
                             .opacity(isHovering ? 1 : 0)
                             .animation(.easeInOut(duration: 0.2), value: isHovering)
                     )
-                    .onHover { hovering in
-                        isHovering = hovering
-                    }
+                    #if os(macOS) || os(iOS) || os(visionOS)
+                        .onHover { hovering in
+                            isHovering = hovering
+                        }
+                    #endif
 
                 Text(name)
                     .font(.caption)
