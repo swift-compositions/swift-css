@@ -6,6 +6,7 @@
 //
 
 import CSS_Test_Support
+import Testing
 
 extension `Snapshot Tests` {
 

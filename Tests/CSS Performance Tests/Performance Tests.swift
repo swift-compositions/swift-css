@@ -5,6 +5,7 @@
 // All performance tests extend this suite via extension in their respective test files.
 
 import CSS_Test_Support
+import Testing
 
 @Suite(.serialized)
 struct `Performance Tests` {}

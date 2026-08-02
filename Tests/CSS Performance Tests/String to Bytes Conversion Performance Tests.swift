@@ -7,6 +7,7 @@
 //
 
 import CSS_Test_Support
+import Testing
 
 extension `Performance Tests` {
     @Suite
