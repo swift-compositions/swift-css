@@ -10,28 +10,12 @@ let package = Package(
     dependencies: [
         .package(path: ".."),
         .package(url: "https://github.com/swift-foundations/swift-testing.git", branch: "main"),
-        .package(
-            url: "https://github.com/swift-foundations/swift-html-render.git",
-            branch: "main"
-        ),
-        .package(url: "https://github.com/swift-standards/swift-html-standard.git", branch: "main"),
     ],
     targets: [
-        .target(
-            name: "CSS Test Support",
-            dependencies: [
-                .product(name: "CSS", package: "swift-css"),
-                .product(name: "CSS Theming", package: "swift-css"),
-                .product(name: "Testing", package: "swift-testing"),
-                .product(name: "HTML Rendering Core Test Support", package: "swift-html-render"),
-                .product(name: "HTML Standard Test Support", package: "swift-html-standard"),
-            ],
-            path: "Support"
-        ),
         .testTarget(
             name: "CSS Performance Tests",
             dependencies: [
-                "CSS Test Support",
+                .product(name: "CSS Test Support", package: "swift-css"),
                 .product(name: "Testing", package: "swift-testing"),
             ],
             path: "CSS Performance Tests"
@@ -39,7 +23,7 @@ let package = Package(
         .testTarget(
             name: "CSS Snapshot Tests",
             dependencies: [
-                "CSS Test Support",
+                .product(name: "CSS Test Support", package: "swift-css"),
                 .product(name: "Testing", package: "swift-testing"),
             ],
             path: "CSS Snapshot Tests"
