@@ -81,6 +81,7 @@ let package = Package(
             dependencies: [
                 .css,
                 .cssTheming,
+                .product(name: "HTML Rendering Core Test Support", package: "swift-html-render"),
             ],
             path: "Tests/Support"
         ),
