@@ -34,7 +34,7 @@ extension HTML.CSS {
                     )
                 } else {
                     // Different light/dark: emit both with dark mode media query
-                    let ctx = HTML.Element.Style.Context.current
+                    let ctx = HTML.Style.Rule.Context.current
                     let darkMedia = W3C_CSS_MediaQueries.Media.prefersColorScheme(.dark)
                     let darkAtRule: HTML.AtRule = {
                         if let existingAtRule = ctx.atRule {
@@ -185,7 +185,7 @@ extension HTML.View {
                 self.inlineStyle(RawProperty<P>("\(borderStyle) \(lightColor)"))
             } else {
                 // Different light/dark: emit both with dark mode media query
-                let ctx = HTML.Element.Style.Context.current
+                let ctx = HTML.Style.Rule.Context.current
                 let darkMedia = W3C_CSS_MediaQueries.Media.prefersColorScheme(.dark)
                 let darkAtRule: HTML.AtRule = {
                     if let existingAtRule = ctx.atRule {
