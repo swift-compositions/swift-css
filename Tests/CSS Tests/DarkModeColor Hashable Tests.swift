@@ -1,18 +1,9 @@
-//
-//  DarkModeColor Hashable Tests.swift
-//  swift-css
-//
-//  Tests for DarkModeColor Hashable and Equatable conformance.
-//
-
 import CSS
 import CSS_Theming
 import Testing
 
 @Suite
 struct `DarkModeColor Hashable Tests` {
-
-    // MARK: - Equatable
 
     @Test
     func `equal colors with same light and dark are equal`() {
@@ -41,8 +32,6 @@ struct `DarkModeColor Hashable Tests` {
         let explicit = DarkModeColor(light: .hex("FF0000"), dark: .hex("FF0000"))
         #expect(diagonal == explicit)
     }
-
-    // MARK: - Hashable
 
     @Test
     func `equal colors produce same hash`() {

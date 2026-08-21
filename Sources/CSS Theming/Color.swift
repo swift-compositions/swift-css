@@ -1,10 +1,3 @@
-//
-//  File.swift
-//  coenttb-html
-//
-//  Created by Coen ten Thije Boonkkamp on 18/09/2024.
-//
-
 extension DarkModeColor {
     public func reverse() -> Self {
         .init(
@@ -233,54 +226,3 @@ extension DarkModeColor {
     public static let brown850: Self = .init(light: .brown850, dark: .hex("773b00"))
     public static let brown900: Self = .init(light: .brown900, dark: .hex("553000"))
 }
-
-// extension HTML {
-//    @discardableResult
-//    @HTML.Builder
-//    func color(
-//        _ color: HTMLColor?,
-//        media: W3C_CSS_MediaQueries.Media? = nil,
-//        pre: String? = nil,
-//        pseudo: HTML.Pseudo? = nil
-//    ) -> some HTML.View {
-//        if let color {
-//            self.color(light: color.light, dark: color.dark, media: media, pre: pre, pseudo: pseudo)
-//        } else {
-//            self
-//        }
-//    }
-// }
-
-//
-// extension HTML {
-//    @discardableResult
-//    @HTML.Builder
-//    @_disfavoredOverload
-//    func backgroundColor(
-//        _ color: HTMLColor?,
-//        media: W3C_CSS_MediaQueries.Media? = nil,
-//        pre: String? = nil,
-//        pseudo: HTML.Pseudo? = nil
-//    ) -> some HTML.View {
-//        fatalError()
-////        if let color {
-////            self.color(light: color.light, dark: color.dark, media: media, pre: pre, pseudo: pseudo)
-////        } else {
-////            self
-////        }
-//    }
-// }
-
-// extension HTML {
-//    @discardableResult
-//    @HTML.Builder
-//    @_disfavoredOverload
-//    public func color2(
-//        _ color: CSS_Standard.Color.WithDarkMode.Color?,
-//        media: W3C_CSS_MediaQueries.Media? = nil,
-//        pre: String? = nil,
-//        pseudo: HTML.Pseudo? = nil
-//    ) -> some HTML.View {
-//        self.color(color.map(CSS_Standard.Color.WithDarkMode.color))
-//    }
-// }

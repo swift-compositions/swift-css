@@ -1,10 +1,3 @@
-//
-//  ListStyle.swift
-//  swift-css
-//
-//  List style convenience enum and CSS extension.
-//
-
 public import CSS_HTML_Rendering
 public import CSS_Standard
 import HTML_Rendering

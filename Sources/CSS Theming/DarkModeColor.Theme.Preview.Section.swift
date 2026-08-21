@@ -1,15 +1,8 @@
-//
-//  DarkModeColor.Theme.Preview.Section.swift
-//  swift-css
-//
-//  Created by Coen ten Thije Boonkkamp on 12/09/2025.
-//
-
 #if canImport(SwiftUI)
     import SwiftUI
 
     extension DarkModeColor.Theme.Preview {
-        /// A section displaying a group of colors
+
         struct Section: View {
             let title: String
             let colors: [(name: String, color: DarkModeColor)]

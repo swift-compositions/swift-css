@@ -1,10 +1,3 @@
-//
-//  AlignItems.swift
-//  swift-css
-//
-//  AlignItems convenience extensions with SwiftUI-like naming.
-//
-
 public import CSS_Standard
 
 extension AlignItems {

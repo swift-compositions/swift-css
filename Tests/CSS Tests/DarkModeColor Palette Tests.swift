@@ -1,18 +1,9 @@
-//
-//  DarkModeColor Palette Tests.swift
-//  swift-css
-//
-//  Tests for DarkModeColor palette shades and theme colors.
-//
-
 import CSS
 import CSS_Theming
 import Testing
 
 @Suite
 struct `DarkModeColor Palette Tests` {
-
-    // MARK: - Gray Shades
 
     @Test(
         arguments: [
@@ -28,8 +19,6 @@ struct `DarkModeColor Palette Tests` {
         )
     }
 
-    // MARK: - Blue Shades
-
     @Test(
         arguments: [
             ("blue100", DarkModeColor.blue100),
@@ -43,8 +32,6 @@ struct `DarkModeColor Palette Tests` {
             "Blue shade \(name) should have different light and dark values"
         )
     }
-
-    // MARK: - Red Shades
 
     @Test(
         arguments: [
@@ -60,8 +47,6 @@ struct `DarkModeColor Palette Tests` {
         )
     }
 
-    // MARK: - Green Shades
-
     @Test(
         arguments: [
             ("green100", DarkModeColor.green100),
@@ -75,8 +60,6 @@ struct `DarkModeColor Palette Tests` {
             "Green shade \(name) should have different light and dark values"
         )
     }
-
-    // MARK: - Reverse
 
     @Test
     func `reverse swaps light and dark values`() {
@@ -94,8 +77,6 @@ struct `DarkModeColor Palette Tests` {
         #expect(doubleReversed.dark == original.dark)
     }
 
-    // MARK: - Cyan/Teal Aliasing
-
     @Test
     func `Cyan aliases to Teal`() {
         #expect(DarkModeColor.cyan100.light == DarkModeColor.teal100.light)
@@ -105,8 +86,6 @@ struct `DarkModeColor Palette Tests` {
         #expect(DarkModeColor.cyan900.light == DarkModeColor.teal900.light)
         #expect(DarkModeColor.cyan900.dark == DarkModeColor.teal900.dark)
     }
-
-    // MARK: - Special Colors
 
     @Test
     func `Transparent has same light and dark values`() {

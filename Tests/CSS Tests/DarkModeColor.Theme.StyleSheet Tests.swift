@@ -1,12 +1,3 @@
-//
-//  DarkModeColor.Theme.StyleSheet Tests.swift
-//  swift-css
-//
-//  Regression coverage for F-001: translucent stylesheet variables must be computed
-//  through typed opacity arithmetic, not by concatenating a literal hex suffix onto
-//  an arbitrary color description.
-//
-
 import CSS
 import CSS_Theming
 import Testing
@@ -20,7 +11,6 @@ extension DarkModeColor.Theme.StyleSheet {
             let theme = DarkModeColor.Theme.default
             let css = theme.stylesheet.description
 
-            // Historically: "#fff" + "33" = "#fff33" — a 5-digit hex value, invalid CSS.
             #expect(!css.contains("#fff33"))
 
             let expected = theme.white.light.opacity(0.2).description

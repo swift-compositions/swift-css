@@ -1,10 +1,3 @@
-//
-//  DarkModeColor Color Manipulation Tests.swift
-//  swift-css
-//
-//  Tests for DarkModeColor color manipulation operations.
-//
-
 import CSS
 import CSS_Theming
 import Testing
@@ -12,14 +5,11 @@ import Testing
 @Suite
 struct `DarkModeColor Color Manipulation Tests` {
 
-    // MARK: - Brightness Adjustment
-
     @Test
     func `adjustBrightness with zero preserves color description`() {
         let color = DarkModeColor(light: .hex("808080"), dark: .hex("404040"))
         let adjusted = color.adjustBrightness(by: 0.0)
-        // adjustBrightness decomposes hex to RGB components; the visual value
-        // is preserved but the representation may change (hex -> rgb)
+
         #expect(adjusted.light.description.contains("128"))
         #expect(adjusted.dark.description.contains("64"))
     }
@@ -34,8 +24,6 @@ struct `DarkModeColor Color Manipulation Tests` {
         #expect(adjusted.light != color.light)
         #expect(adjusted.dark != color.dark)
     }
-
-    // MARK: - Darker
 
     @Test
     func `darker with default produces darker colors`() {
@@ -59,8 +47,6 @@ struct `DarkModeColor Color Manipulation Tests` {
         #expect(slight.light != heavy.light)
     }
 
-    // MARK: - Lighter
-
     @Test
     func `lighter with default produces lighter colors`() {
         let color = DarkModeColor(
@@ -83,8 +69,6 @@ struct `DarkModeColor Color Manipulation Tests` {
         #expect(slight.light != heavy.light)
     }
 
-    // MARK: - Opacity
-
     @Test
     func `opacity transforms both channels`() {
         let color = DarkModeColor(
@@ -103,12 +87,9 @@ struct `DarkModeColor Color Manipulation Tests` {
             dark: .named(.blue)
         )
         let full = color.opacity(1.0)
-        // opacity(1.0) may still change the representation (named -> rgba),
-        // but the visual result should be the same
+
         _ = full
     }
-
-    // MARK: - Composition
 
     @Test
     func `chained manipulations compose correctly`() {
@@ -117,9 +98,7 @@ struct `DarkModeColor Color Manipulation Tests` {
             dark: .hex("404040")
         )
         let result = color.darker(by: 0.1).lighter(by: 0.1)
-        // After darkening then lightening by the same amount,
-        // the result should be close but not necessarily identical
-        // due to floating-point arithmetic
+
         _ = result
     }
 

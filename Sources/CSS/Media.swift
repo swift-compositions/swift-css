@@ -1,17 +1,10 @@
-//
-//  Media.swift
-//  swift-css
-//
-//  Predefined media query constants for common responsive breakpoints.
-//
-
 import CSS_HTML_Rendering
 public import HTML_Rendering
 
 extension HTML.AtRule.Media {
-    /// Targets devices in dark mode.
+
     public static let dark = Self(rawValue: "@media (prefers-color-scheme: dark)")
-    /// Targets print media (when the page is being printed).
+
     public static let print = Self(rawValue: "@media print")
     public static let desktop = Self(rawValue: "@media only screen and (min-width: 832px)")
     public static let mobile = Self(rawValue: "@media only screen and (max-width: 831px)")

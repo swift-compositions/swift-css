@@ -1,19 +1,9 @@
-//
-//  CSS Property Rendering Performance Tests.swift
-//  swift-html-css-pointfree
-//
-//  Performance tests for CSS property rendering with String → Bytes conversion overhead.
-//  Measures the cost of CustomStringConvertible calls and UTF-8 encoding.
-//
-
 import CSS_Test_Support
 import Testing
 
 extension `Performance Tests` {
     @Suite
     struct `CSS Property Rendering` {
-
-        // MARK: - Simple Color Properties (String → Bytes)
 
         @Test(.timed(threshold: .seconds(2)))
         func `simple color - rgb rendering 1K times`() throws {
@@ -50,8 +40,6 @@ extension `Performance Tests` {
                 )
             }
         }
-
-        // MARK: - Multiple Properties (Accumulated String → Bytes Cost)
 
         @Test(.timed(threshold: .seconds(2)))
         func `multiple properties - 5 properties 1K times`() throws {
@@ -90,8 +78,6 @@ extension `Performance Tests` {
             }
         }
 
-        // MARK: - Complex CSS Values
-
         @Test(.timed(threshold: .seconds(2)))
         func `complex values - rgba with alpha 1K times`() throws {
             for _ in 0..<1_000 {
@@ -103,8 +89,6 @@ extension `Performance Tests` {
                 )
             }
         }
-
-        // MARK: - Many Elements (Batch String → Bytes Conversion)
 
         @Test(.timed(threshold: .seconds(2)))
         func `many elements - 50 styled divs 50 times`() throws {
@@ -145,8 +129,6 @@ extension `Performance Tests` {
             }
         }
 
-        // MARK: - Different Property Types
-
         @Test(.timed(threshold: .seconds(2)))
         func `property types - length properties 1K times`() throws {
             for _ in 0..<1_000 {
@@ -173,8 +155,6 @@ extension `Performance Tests` {
                 )
             }
         }
-
-        // MARK: - Real-World Scenarios
 
         @Test(.timed(threshold: .seconds(2)))
         func `real-world - card component 500 times`() throws {
@@ -203,8 +183,6 @@ extension `Performance Tests` {
                 )
             }
         }
-
-        // MARK: - Baseline (No Styling)
 
         @Test(.timed(threshold: .seconds(2)))
         func `baseline - unstyled elements 1K times`() throws {

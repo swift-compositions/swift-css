@@ -1,25 +1,9 @@
-//
-//  CSS+positioned.swift
-//  swift-css
-//
-//  Convenience methods for positioning properties.
-//
-
 public import CSS_HTML_Rendering
 import CSS_Standard
 import HTML_Rendering
 
 extension HTML.CSS {
-    /// Convenience method for positioning properties.
-    ///
-    /// ```swift
-    /// div.css.positioned(
-    ///     .absolute,
-    ///     top: .px(0),
-    ///     left: .px(0),
-    ///     right: .px(0)
-    /// )
-    /// ```
+
     @inlinable
     @discardableResult
     public func positioned(
@@ -51,12 +35,6 @@ extension HTML.CSS {
         return HTML.CSS<HTML.AnyView>(base: result)
     }
 
-    /// Convenience for absolutely positioned element that fills its container.
-    ///
-    /// ```swift
-    /// div.css.absoluteFill()
-    /// // Equivalent to: position(.absolute), top(0), right(0), bottom(0), left(0)
-    /// ```
     @inlinable
     @discardableResult
     public func absoluteFill() -> HTML.CSS<some HTML.View> {

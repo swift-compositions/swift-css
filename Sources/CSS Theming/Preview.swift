@@ -1,10 +1,3 @@
-//
-//  Preview.swift
-//  swift-html
-//
-//  Created by Coen ten Thije Boonkkamp on 12/09/2025.
-//
-
 #if canImport(SwiftUI)
     import SwiftUI
 
@@ -18,7 +11,7 @@
     extension DarkModeColor.Theme.Preview {
         var body: some View {
             VStack(alignment: .leading, spacing: 24) {
-                // Base Colors Section
+
                 Section(
                     title: "Base Colors",
                     colors: [
@@ -37,7 +30,6 @@
                     colorScheme: colorScheme
                 )
 
-                // Neutral Colors Section
                 Section(
                     title: "Neutral Colors",
                     colors: [
@@ -51,7 +43,6 @@
                     colorScheme: colorScheme
                 )
 
-                // Text Colors Section
                 Section(
                     title: "Text Colors",
                     colors: [
@@ -72,7 +63,6 @@
                     colorScheme: colorScheme
                 )
 
-                // Background Colors Section
                 Section(
                     title: "Background Colors",
                     colors: [
@@ -98,7 +88,6 @@
                     colorScheme: colorScheme
                 )
 
-                // Border Colors Section
                 Section(
                     title: "Border Colors",
                     colors: [
@@ -119,7 +108,6 @@
                     colorScheme: colorScheme
                 )
 
-                // Branding Colors Section
                 Section(
                     title: "Branding Colors",
                     colors: [
@@ -133,16 +121,15 @@
                 )
             }
             .padding()
-            //            .background(SwiftUI.Color(.systemBackground))
+
         }
     }
 
     extension DarkModeColor {
-        /// Converts DarkModeColor to SwiftUI.Color
+
         func toSwiftUIColor(for colorScheme: SwiftUI.ColorScheme) -> SwiftUI.Color {
             let cssColor = colorScheme == .light ? self.light : self.dark
 
-            // Parse the CSS color and convert to SwiftUI.Color
             switch cssColor {
             case .hex(let hexString):
                 return SwiftUI.Color(hex: "\(hexString)")
@@ -166,14 +153,14 @@
                 return SwiftUI.Color.clear
 
             default:
-                // Fallback for other color types
+
                 return SwiftUI.Color.gray
             }
         }
     }
 
     extension SwiftUI.Color {
-        /// Initialize from hex string
+
         init(hex: String) {
             let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
             var int: UInt64 = 0
@@ -183,13 +170,13 @@
             let g: UInt64
             let b: UInt64
             switch hex.count {
-            case 3:  // RGB (12-bit)
+            case 3:
                 (a, r, g, b) = (255, (int >> 8) * 17, (int >> 4 & 0xF) * 17, (int & 0xF) * 17)
 
-            case 6:  // RGB (24-bit)
+            case 6:
                 (a, r, g, b) = (255, int >> 16, int >> 8 & 0xFF, int & 0xFF)
 
-            case 8:  // ARGB (32-bit)
+            case 8:
                 (a, r, g, b) = (int >> 24, int >> 16 & 0xFF, int >> 8 & 0xFF, int & 0xFF)
 
             default:

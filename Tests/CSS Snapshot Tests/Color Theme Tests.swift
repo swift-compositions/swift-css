@@ -1,17 +1,8 @@
-//
-//  Color Theme Tests.swift
-//  swift-css
-//
-//  Tests for DarkModeColor theme palettes and themed color statics.
-//
-
 import CSS_Test_Support
 import Testing
 
 @Suite
 struct `Color Theme Tests` {
-
-    // MARK: - Palette Dark Mode Variants
 
     @Test(
         arguments: [
@@ -69,8 +60,6 @@ struct `Color Theme Tests` {
         )
     }
 
-    // MARK: - Reverse Method
-
     @Test
     func `reverse swaps light and dark values`() {
         let original = DarkModeColor.red500
@@ -87,8 +76,6 @@ struct `Color Theme Tests` {
         #expect(doubleReversed.dark == original.dark)
     }
 
-    // MARK: - Cyan and Teal Aliases
-
     @Test
     func `Cyan aliases to Teal`() {
         #expect(DarkModeColor.cyan100.light == DarkModeColor.teal100.light)
@@ -98,8 +85,6 @@ struct `Color Theme Tests` {
         #expect(DarkModeColor.cyan900.light == DarkModeColor.teal900.light)
         #expect(DarkModeColor.cyan900.dark == DarkModeColor.teal900.dark)
     }
-
-    // MARK: - Special Colors
 
     @Test
     func `Transparent has same light and dark values`() {
@@ -112,8 +97,6 @@ struct `Color Theme Tests` {
         #expect(DarkModeColor.cardBackground.light != DarkModeColor.cardBackground.dark)
     }
 }
-
-// MARK: - Snapshot Tests
 
 extension `Snapshot Tests` {
     @Suite

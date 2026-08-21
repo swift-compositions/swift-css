@@ -1,27 +1,9 @@
-//
-//  Flex.swift
-//  swift-css
-//
-//  Flexbox convenience methods for CSS.
-//
-
 public import CSS_HTML_Rendering
 import CSS_Standard
 import HTML_Rendering
 
 extension HTML.CSS {
-    /// Convenience method for flexbox container properties.
-    ///
-    /// Sets `display: flex` and configures flex container properties.
-    ///
-    /// ```swift
-    /// div.css.flexContainer(
-    ///     direction: .row,
-    ///     wrap: .wrap,
-    ///     justification: .spaceBetween,
-    ///     itemAlignment: .center
-    /// )
-    /// ```
+
     @discardableResult
     @inlinable
     public func flexContainer(
@@ -56,15 +38,6 @@ extension HTML.CSS {
             .columnGap(columnGap)
     }
 
-    /// Convenience method for flex item properties.
-    ///
-    /// ```swift
-    /// div.css.flexItem(
-    ///     grow: .number(1),
-    ///     shrink: .number(0),
-    ///     basis: .auto
-    /// )
-    /// ```
     @discardableResult
     @inlinable
     public func flexItem(

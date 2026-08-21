@@ -1,10 +1,3 @@
-//
-//  BackdropFilter Tests.swift
-//  swift-html
-//
-//  Created by Claude AI on 11/04/2025.
-//
-
 import CSS_Test_Support
 import Testing
 
@@ -58,32 +51,6 @@ extension `Snapshot Tests` {
                 """
             }
         }
-
-        //    @Test
-        //    func htmlElementWithMultipleBackdropFiltersRendersCorrectly() throws {
-        //        assertInlineSnapshot(
-        //            of: HTML.Document {
-        //                div.css.backdropFilter(.composite([.blur(.px(5)), .brightness(1.2)]))
-        //            },
-        //            as: .html
-        //        ) {
-        //            """
-        //            <!doctype html>
-        //            <html>
-        //              <head>
-        //                <style>
-        //            .backdrop-filter-YazUw1{backdrop-filter:blur(5px) brightness(1.2)}
-        //
-        //                </style>
-        //              </head>
-        //              <body>
-        //            <div class="backdrop-filter-YazUw1">
-        //            </div>
-        //              </body>
-        //            </html>
-        //            """
-        //        }
-        //    }
 
         @Test
         func `HTML backdrop-filter with none value renders properly`() throws {

@@ -1,10 +1,3 @@
-//
-//  File.swift
-//  coenttb-newsletter
-//
-//  Created by Coen ten Thije Boonkkamp on 26/06/2025.
-//
-
 import CSS_Standard
 import Synchronization
 
@@ -57,21 +50,15 @@ extension Font {
 }
 
 extension Font.Defaults {
-    /// Global prepared value (set via `prepareDependencies`).
-    ///
-    /// Guarded by a `Mutex` so concurrent `_prepare` writes and `current` reads
-    /// never observe a torn (partially-written) value.
+
     private static let _preparedStorage: Mutex<Font.Defaults> = Mutex(.default)
 
-    /// Scoped override (set via `withDependencies`)
     @TaskLocal private static var _scoped: Font.Defaults? = nil
 
-    /// Current font defaults. Returns scoped override if set, otherwise prepared value.
     public static var current: Font.Defaults {
         _scoped ?? _preparedStorage.withLock { $0 }
     }
 
-    /// Set the global prepared value.
     public static func _prepare(_ value: Font.Defaults) {
         _preparedStorage.withLock { $0 = value }
     }
@@ -113,7 +100,7 @@ extension Font.Defaults {
         .init(
             extraLargeTitle2: .init(
                 family: .systemUi,
-                size: .rem(2.75),  // ~44px
+                size: .rem(2.75),
                 stretch: .normal,
                 style: .normal,
                 variant: .normal,
@@ -122,7 +109,7 @@ extension Font.Defaults {
             ),
             extraLargeTitle: .init(
                 family: .systemUi,
-                size: .rem(2.25),  // ~36px
+                size: .rem(2.25),
                 stretch: .normal,
                 style: .normal,
                 variant: .normal,
@@ -131,7 +118,7 @@ extension Font.Defaults {
             ),
             largeTitle: .init(
                 family: .systemUi,
-                size: .rem(2),  // ~32px
+                size: .rem(2),
                 stretch: .normal,
                 style: .normal,
                 variant: .normal,
@@ -140,7 +127,7 @@ extension Font.Defaults {
             ),
             title: .init(
                 family: .systemUi,
-                size: .rem(1.75),  // ~28px
+                size: .rem(1.75),
                 stretch: .normal,
                 style: .normal,
                 variant: .normal,
@@ -149,7 +136,7 @@ extension Font.Defaults {
             ),
             title2: .init(
                 family: .systemUi,
-                size: .rem(1.375),  // ~22px
+                size: .rem(1.375),
                 stretch: .normal,
                 style: .normal,
                 variant: .normal,
@@ -158,7 +145,7 @@ extension Font.Defaults {
             ),
             title3: .init(
                 family: .systemUi,
-                size: .rem(1.25),  // ~20px
+                size: .rem(1.25),
                 stretch: .normal,
                 style: .normal,
                 variant: .normal,
@@ -167,7 +154,7 @@ extension Font.Defaults {
             ),
             headline: .init(
                 family: .systemUi,
-                size: .rem(1.0625),  // ~17px
+                size: .rem(1.0625),
                 stretch: .normal,
                 style: .normal,
                 variant: .normal,
@@ -176,7 +163,7 @@ extension Font.Defaults {
             ),
             subheadline: .init(
                 family: .systemUi,
-                size: .rem(0.9375),  // ~15px
+                size: .rem(0.9375),
                 stretch: .normal,
                 style: .normal,
                 variant: .normal,
@@ -185,7 +172,7 @@ extension Font.Defaults {
             ),
             body: .init(
                 family: .systemUi,
-                size: .rem(1),  // ~16px (base size)
+                size: .rem(1),
                 stretch: .normal,
                 style: .normal,
                 variant: .normal,
@@ -194,7 +181,7 @@ extension Font.Defaults {
             ),
             callout: .init(
                 family: .systemUi,
-                size: .rem(1),  // ~16px
+                size: .rem(1),
                 stretch: .normal,
                 style: .normal,
                 variant: .normal,
@@ -203,7 +190,7 @@ extension Font.Defaults {
             ),
             caption: .init(
                 family: .systemUi,
-                size: .rem(0.75),  // ~12px
+                size: .rem(0.75),
                 stretch: .normal,
                 style: .normal,
                 variant: .normal,
@@ -212,7 +199,7 @@ extension Font.Defaults {
             ),
             caption2: .init(
                 family: .systemUi,
-                size: .rem(0.6875),  // ~11px
+                size: .rem(0.6875),
                 stretch: .normal,
                 style: .normal,
                 variant: .normal,
@@ -221,7 +208,7 @@ extension Font.Defaults {
             ),
             footnote: .init(
                 family: .systemUi,
-                size: .rem(0.8125),  // ~13px
+                size: .rem(0.8125),
                 stretch: .normal,
                 style: .normal,
                 variant: .normal,
@@ -232,28 +219,15 @@ extension Font.Defaults {
     }
 }
 
-// MARK: - Convenience API for setting font
-
 extension Font.Defaults {
-    /// Execute an operation with custom font defaults.
-    ///
-    /// Usage:
-    /// ```swift
-    /// Font.Defaults.withValue(customFont) {
-    ///     // Code here sees customFont
-    /// }
-    /// ```
+
     public static func withValue<R, Failure: Swift.Error>(
         _ font: Font.Defaults,
         operation: () throws(Failure) -> R
     ) throws(Failure) -> R {
-        // `TaskLocal.withValue` is untyped `rethrows`, so the error is bridged back
-        // to `Failure` explicitly; `operation` is the sole throwing source, so the
-        // downcast always succeeds.
+
         let result: Result<R, Failure>
-        // swift-linter:disable:next do throws for typed catch
-        // REASON: Synchronization.TaskLocal.withValue(_:operation:) is a cross-module
-        // stdlib API declared untyped `rethrows`; there is no `E` to name in `do throws(E)`.
+
         do {
             result = .success(try $_scoped.withValue(font, operation: operation))
         } catch {
@@ -269,18 +243,15 @@ extension Font.Defaults {
         return try result.get()
     }
 
-    /// Execute an async operation with custom font defaults.
     nonisolated(nonsending)
         public static func withValue<R, Failure: Swift.Error>(
             _ font: Font.Defaults,
             operation: nonisolated(nonsending) () async throws(Failure) -> R
         ) async throws(Failure) -> R
     {
-        // See the sync overload above for why the error is bridged explicitly.
+
         let result: Result<R, Failure>
-        // swift-linter:disable:next do throws for typed catch
-        // REASON: Synchronization.TaskLocal.withValue(_:operation:) is a cross-module
-        // stdlib API declared untyped `rethrows`; there is no `E` to name in `do throws(E)`.
+
         do {
             result = .success(try await $_scoped.withValue(font, operation: operation))
         } catch {

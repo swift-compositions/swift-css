@@ -1,11 +1,3 @@
-//
-//  Font.Defaults Concurrency Tests.swift
-//  swift-css
-//
-//  Regression coverage for F-002: the global prepared font-defaults storage must
-//  stay internally consistent under concurrent `_prepare` writes and `current` reads.
-//
-
 import CSS
 import CSS_Theming
 import Testing
@@ -50,11 +42,6 @@ extension CSS_Theming.Font.Defaults {
 
             defer { CSS_Theming.Font.Defaults._prepare(.default) }
 
-            // Seed synchronously before any concurrent access starts: otherwise a
-            // reader task can legitimately run before the first writer task, observing
-            // the pre-test `.default` value (which matches neither snapshot) and
-            // producing a false-positive "torn value" report unrelated to the fix
-            // under test.
             CSS_Theming.Font.Defaults._prepare(snapshotA)
 
             await withTaskGroup(of: Void.self) { group in

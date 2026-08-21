@@ -1,16 +1,9 @@
-//
-//  CSS+borderTopColor.swift
-//  swift-css
-//
-//  CSS border-top-color property with dark mode support.
-//
-
 public import CSS_HTML_Rendering
 public import CSS_Standard
 import HTML_Rendering
 
 extension HTML.CSS {
-    /// Sets the border top color using a DarkModeColor value.
+
     @discardableResult
     @CSS_HTML_Rendering.CSS.Builder
     public func borderTopColor(
@@ -24,7 +17,6 @@ extension HTML.CSS {
         }
     }
 
-    /// Sets the border top color using separate light and dark color values.
     @discardableResult
     public func borderTopColor(
         light: CSS_Standard.Color.Value,

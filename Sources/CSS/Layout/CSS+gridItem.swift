@@ -1,23 +1,9 @@
-//
-//  CSS+gridItem.swift
-//  swift-css
-//
-//  Convenience method for CSS Grid item properties.
-//
-
 public import CSS_HTML_Rendering
 import CSS_Standard
 import HTML_Rendering
 
 extension HTML.CSS {
-    /// Convenience method for CSS Grid item properties.
-    ///
-    /// ```swift
-    /// div.css.gridItem(
-    ///     column: .span(2),
-    ///     row: .span(1)
-    /// )
-    /// ```
+
     @inlinable
     @discardableResult
     public func gridItem(

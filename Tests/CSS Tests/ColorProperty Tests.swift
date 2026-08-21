@@ -1,18 +1,9 @@
-//
-//  ColorProperty Tests.swift
-//  swift-css
-//
-//  Tests for ColorProperty (WithGlobal<DarkModeColor>) type.
-//
-
 import CSS
 import CSS_Theming
 import Testing
 
 @Suite
 struct `ColorProperty Tests` {
-
-    // MARK: - Construction
 
     @Test
     func `single creates normalized diagonal color`() {
@@ -65,8 +56,6 @@ struct `ColorProperty Tests` {
             Issue.record("Expected .value case")
         }
     }
-
-    // MARK: - Global Values
 
     @Test
     func `inherit creates global case`() {

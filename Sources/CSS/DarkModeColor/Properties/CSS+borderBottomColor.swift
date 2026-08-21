@@ -1,16 +1,9 @@
-//
-//  CSS+borderBottomColor.swift
-//  swift-css
-//
-//  CSS border-bottom-color property with dark mode support.
-//
-
 public import CSS_HTML_Rendering
 public import CSS_Standard
 import HTML_Rendering
 
 extension HTML.CSS {
-    /// Sets the border bottom color using a DarkModeColor value.
+
     @discardableResult
     @CSS_HTML_Rendering.CSS.Builder
     public func borderBottomColor(
@@ -26,7 +19,6 @@ extension HTML.CSS {
         }
     }
 
-    /// Sets the border bottom color using separate light and dark color values.
     @discardableResult
     public func borderBottomColor(
         light: CSS_Standard.Color.Value,

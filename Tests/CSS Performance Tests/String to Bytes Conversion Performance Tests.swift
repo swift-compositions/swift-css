@@ -1,19 +1,9 @@
-//
-//  String to Bytes Conversion Performance Tests.swift
-//  swift-html-css-pointfree
-//
-//  Performance tests focused on measuring String → Bytes (UTF-8) conversion overhead.
-//  Tests the fundamental cost of the two-stage conversion: Type → String → Bytes.
-//
-
 import CSS_Test_Support
 import Testing
 
 extension `Performance Tests` {
     @Suite
     struct `String to Bytes Conversion` {
-
-        // MARK: - Type → String Conversion Cost (.description)
 
         @Test(.timed(threshold: .seconds(2)))
         func `type to string - Color.description 10K times`() {
@@ -39,8 +29,6 @@ extension `Performance Tests` {
             }
         }
 
-        // MARK: - String → Bytes Conversion Cost (UTF-8)
-
         @Test(.timed(threshold: .seconds(2)))
         func `string to bytes - simple string UTF-8 10K times`() {
             let str = "rgb(255, 128, 64)"
@@ -64,8 +52,6 @@ extension `Performance Tests` {
                 _ = Array(str.utf8)
             }
         }
-
-        // MARK: - Full Conversion Chain: Type → String → Bytes
 
         @Test(.timed(threshold: .seconds(2)))
         func `full chain - Color → String → Bytes 5K times`() {
@@ -93,8 +79,6 @@ extension `Performance Tests` {
                 _ = Array(str.utf8)
             }
         }
-
-        // MARK: - Accumulated Conversion Cost (Multiple Properties)
 
         @Test(.timed(threshold: .seconds(2)))
         func `accumulated - 5 properties converted 2K times`() {
@@ -133,34 +117,30 @@ extension `Performance Tests` {
             }
         }
 
-        // MARK: - Comparison: Direct Bytes vs String Path
-
         @Test(.timed(threshold: .seconds(2)))
         func `comparison - direct bytes RGB 10K times`() {
-            // Simulating what a hypothetical byte-based renderer would do
+
             for _ in 0..<10_000 {
                 var bytes: [UInt8] = []
-                bytes.append(contentsOf: [114, 103, 98, 40])  // "rgb("
+                bytes.append(contentsOf: [114, 103, 98, 40])
                 bytes.append(contentsOf: "255".utf8)
-                bytes.append(contentsOf: [44, 32])  // ", "
+                bytes.append(contentsOf: [44, 32])
                 bytes.append(contentsOf: "128".utf8)
-                bytes.append(contentsOf: [44, 32])  // ", "
+                bytes.append(contentsOf: [44, 32])
                 bytes.append(contentsOf: "64".utf8)
-                bytes.append(41)  // ")"
+                bytes.append(41)
                 _ = bytes
             }
         }
 
         @Test(.timed(threshold: .seconds(2)))
         func `comparison - string path RGB 10K times`() {
-            // Current approach: String interpolation → UTF-8
+
             for _ in 0..<10_000 {
                 let str = "rgb(255, 128, 64)"
                 _ = Array(str.utf8)
             }
         }
-
-        // MARK: - Memory Allocation Overhead
 
         @Test(.timed(threshold: .seconds(2)))
         func `allocation - String creation 10K times`() {
@@ -188,8 +168,6 @@ extension `Performance Tests` {
             }
         }
 
-        // MARK: - Escaping Overhead
-
         @Test(.timed(threshold: .seconds(2)))
         func `escaping - attribute value no escaping 5K times`() throws {
             let value = "simple-value-123"
@@ -213,8 +191,6 @@ extension `Performance Tests` {
                 )
             }
         }
-
-        // MARK: - Cache Locality Tests
 
         @Test(.timed(threshold: .seconds(2)))
         func `cache - same property reused 10K times`() {

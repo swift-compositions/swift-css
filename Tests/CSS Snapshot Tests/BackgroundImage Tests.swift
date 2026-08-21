@@ -1,10 +1,3 @@
-//
-//  BackgroundImage Tests.swift
-//  swift-html
-//
-//  Created by Claude AI on 11/04/2025.
-//
-
 import CSS_Test_Support
 import Testing
 
@@ -34,84 +27,6 @@ extension `Snapshot Tests` {
                 """
             }
         }
-
-        //    @Test
-        //    func htmlElementWithBackgroundImageLinearGradientRendersCorrectly() throws {
-        //        assertInlineSnapshot(
-        //            of: HTML.Document {
-        //                div.css.backgroundImage(.linearGradient(degree: 45, .color(.red), .color(.blue)))
-        //            },
-        //            as: .html
-        //        ) {
-        //            """
-        //            <!doctype html>
-        //            <html>
-        //              <head>
-        //                <style>
-        //            .background-image-EdcYg1{background-image:linear-gradient(45deg, red, blue)}
-        //
-        //                </style>
-        //              </head>
-        //              <body>
-        //            <div class="background-image-EdcYg1">
-        //            </div>
-        //              </body>
-        //            </html>
-        //            """
-        //        }
-        //    }
-        //
-        //    @Test
-        //    func htmlElementWithBackgroundImageRadialGradientRendersCorrectly() throws {
-        //        assertInlineSnapshot(
-        //            of: HTML.Document {
-        //                div.css.backgroundImage(.radialGradient(.color(.red), .color(.blue)))
-        //            },
-        //            as: .html
-        //        ) {
-        //            """
-        //            <!doctype html>
-        //            <html>
-        //              <head>
-        //                <style>
-        //            .background-image-kbqMx1{background-image:radial-gradient(red, blue)}
-        //
-        //                </style>
-        //              </head>
-        //              <body>
-        //            <div class="background-image-kbqMx1">
-        //            </div>
-        //              </body>
-        //            </html>
-        //            """
-        //        }
-        //    }
-        //
-        //    @Test
-        //    func htmlElementWithMultipleBackgroundImagesRendersCorrectly() throws {
-        //        assertInlineSnapshot(
-        //            of: HTML.Document {
-        //                div.css.backgroundImage(.composite([.url, .url]))
-        //            },
-        //            as: .html
-        //        ) {
-        //            """
-        //            <!doctype html>
-        //            <html>
-        //              <head>
-        //                <style>
-        //            .background-image-PsRHs1{background-image:url, url}
-        //
-        //                </style>
-        //              </head>
-        //              <body>
-        //            <div class="background-image-PsRHs1">
-        //            </div>
-        //              </body>
-        //            </html>
-        //            """
-        //        }
-        //    }
 
         @Test
         func `HTML background-image with none value renders properly`() throws {

@@ -1,10 +1,3 @@
-//
-//  Border.swift
-//  swift-css
-//
-//  Border type definition with side configuration.
-//
-
 import CSS_HTML_Rendering
 public import CSS_Standard
 

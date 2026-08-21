@@ -1,25 +1,9 @@
-//
-//  Position.swift
-//  swift-css
-//
-//  Convenience method for positioning properties.
-//
-
 public import CSS_HTML_Rendering
 import CSS_Standard
 import HTML_Rendering
 
 extension HTML.CSS {
-    /// Convenience method for positioning with offset values.
-    ///
-    /// ```swift
-    /// div.css.position(
-    ///     .absolute,
-    ///     top: .px(0),
-    ///     left: .px(0),
-    ///     right: .px(0)
-    /// )
-    /// ```
+
     @discardableResult
     @inlinable
     public func position(

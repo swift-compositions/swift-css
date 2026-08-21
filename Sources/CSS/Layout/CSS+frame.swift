@@ -1,24 +1,9 @@
-//
-//  CSS+frame.swift
-//  swift-css
-//
-//  Convenience method for sizing properties (width, height, min/max).
-//
-
 public import CSS_HTML_Rendering
 public import CSS_Standard
 import HTML_Rendering
 
 extension HTML.CSS {
-    /// Convenience method for sizing properties (width, height, min/max).
-    ///
-    /// ```swift
-    /// div.css.frame(
-    ///     width: .percent(100),
-    ///     maxWidth: .px(800),
-    ///     height: .auto
-    /// )
-    /// ```
+
     @inlinable
     @discardableResult
     public func frame(

@@ -1,13 +1,4 @@
-//
-//  File.swift
-//  swift-html
-//
-//  Created by Coen ten Thije Boonkkamp on 13/09/2024.
-//
-
 public import CSS_Standard
-
-// Note: CSS_Standard.Color.Value already has an opacity method, so we don't need to redefine it
 
 extension CSS_Standard.Color.Value {
     public static let gray100 = Self.hex("1a1a1a")
@@ -248,29 +239,16 @@ extension CSS_Standard.Color.Value {
     public static let yellow = Self.yellow500
 }
 
-// MARK: - Extensions for CSS_Standard.Color.Value (Value Type)
-
 extension CSS_Standard.Color.Value {
-    /// Creates a darker version of this color
-    ///
-    /// - Parameter percent: The amount to darken (0.0-1.0)
-    /// - Returns: A darker color
+
     public func darker(by percent: Double = 0.2) -> CSS_Standard.Color.Value {
         return adjustBrightness(by: -percent)
     }
 
-    /// Creates a lighter version of this color
-    ///
-    /// - Parameter percent: The amount to lighten (0.0-1.0)
-    /// - Returns: A lighter color
     public func lighter(by percent: Double = 0.2) -> CSS_Standard.Color.Value {
         return adjustBrightness(by: percent)
     }
 
-    /// Returns an opacity-modified version of this color
-    ///
-    /// - Parameter alpha: The opacity value (0.0-1.0)
-    /// - Returns: A new color with the specified opacity
     public func opacity(_ alpha: Double) -> CSS_Standard.Color.Value {
         let clampedAlpha = min(1.0, max(0.0, alpha))
 
@@ -288,31 +266,28 @@ extension CSS_Standard.Color.Value {
             return .hsla(h, s, l, clampedAlpha)
 
         case .named(let name):
-            // For named colors, we need to convert to RGB values first
+
             if let rgb = namedColorToRgb(name) {
                 return .rgba(rgb.r, rgb.g, rgb.b, clampedAlpha)
             }
             return self
 
         case .hex(let hex):
-            // For hex colors, we can parse the RGB values
+
             if let rgb = hexToRgb(hex.value) {
                 return .rgba(rgb.r, rgb.g, rgb.b, clampedAlpha)
             }
             return self
 
         default:
-            // For other color types, simply return this color as we don't have
-            // a straightforward way to apply opacity
+
             return self
         }
     }
 
-    /// Helper function to convert HEX to RGB
     private func hexToRgb(_ hex: String) -> (r: Int, g: Int, b: Int)? {
         var cleaned = String(hex.trimmingPrefix("#"))
 
-        // Handle shorthand hex (#RGB)
         if cleaned.count == 3 {
             cleaned = cleaned.map { "\($0)\($0)" }.joined()
         }
@@ -333,9 +308,8 @@ extension CSS_Standard.Color.Value {
         return (r: rgb[0], g: rgb[1], b: rgb[2])
     }
 
-    /// Helper function to convert named colors to RGB
     private func namedColorToRgb(_ name: NamedColor) -> (r: Int, g: Int, b: Int)? {
-        // A simple lookup table for basic named colors
+
         switch name {
         case .black: return (0, 0, 0)
         case .silver: return (192, 192, 192)
@@ -357,10 +331,6 @@ extension CSS_Standard.Color.Value {
         }
     }
 
-    /// Adjusts the brightness of a color by a percentage
-    ///
-    /// - Parameter percent: The brightness adjustment (-1.0 to 1.0, where -1.0 is completely darkened and 1.0 is completely lightened)
-    /// - Returns: A new color with adjusted brightness
     public func adjustBrightness(by percent: Double) -> CSS_Standard.Color.Value {
         guard percent >= -1, percent <= 1 else { return self }
 

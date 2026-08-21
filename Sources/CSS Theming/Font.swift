@@ -1,10 +1,3 @@
-//
-//  Font.swift
-//  swift-css
-//
-//  Created by Coen ten Thije Boonkkamp on 26/06/2025.
-//
-
 public import CSS
 public import CSS_Standard
 import HTML_Rendering

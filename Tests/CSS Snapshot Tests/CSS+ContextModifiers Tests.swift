@@ -1,18 +1,9 @@
-//
-//  CSS+ContextModifiers Tests.swift
-//  swift-css
-//
-//  Tests for CSS context modifiers (.dark, .hover, .media, etc.)
-//
-
 import CSS_Test_Support
 import Testing
 
 extension `Snapshot Tests` {
     @Suite
     struct `ContextModifiers Tests` {
-
-        // MARK: - Dark Mode Tests
 
         @Test
         func `dark mode closure syntax`() throws {
@@ -125,8 +116,6 @@ extension `Snapshot Tests` {
             }
         }
 
-        // MARK: - Light Mode Tests
-
         @Test
         func `light mode closure syntax`() throws {
             snapshot(as: .html) {
@@ -180,8 +169,6 @@ extension `Snapshot Tests` {
             }
         }
 
-        // MARK: - Hover Tests
-
         @Test
         func `hover closure syntax`() throws {
             snapshot(as: .html) {
@@ -230,8 +217,6 @@ extension `Snapshot Tests` {
                 """
             }
         }
-
-        // MARK: - Focus Tests
 
         @Test
         func `focus closure syntax`() throws {
@@ -282,8 +267,6 @@ extension `Snapshot Tests` {
             }
         }
 
-        // MARK: - Active Tests
-
         @Test
         func `active closure syntax`() throws {
             snapshot(as: .html) {
@@ -332,8 +315,6 @@ extension `Snapshot Tests` {
                 """
             }
         }
-
-        // MARK: - Media Query Tests
 
         @Test
         func `print media query`() throws {
@@ -439,8 +420,6 @@ extension `Snapshot Tests` {
             }
         }
 
-        // MARK: - Selector Tests
-
         @Test
         func `selector modifier`() throws {
             snapshot(as: .html) {
@@ -464,8 +443,6 @@ extension `Snapshot Tests` {
                 """
             }
         }
-
-        // MARK: - Nested Context Tests
 
         @Test
         func `nested dark and hover`() throws {
@@ -520,8 +497,6 @@ extension `Snapshot Tests` {
                 """
             }
         }
-
-        // MARK: - Combined Styles Tests
 
         @Test
         func `base style with dark and hover variants`() throws {

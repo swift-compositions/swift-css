@@ -1,26 +1,9 @@
-//
-//  CSS+gridContainer.swift
-//  swift-css
-//
-//  Convenience method for CSS Grid container properties.
-//
-
 public import CSS_HTML_Rendering
 import CSS_Standard
 import HTML_Rendering
 
 extension HTML.CSS {
-    /// Convenience method for CSS Grid container properties.
-    ///
-    /// Sets `display: grid` and configures grid container properties.
-    ///
-    /// ```swift
-    /// div.css.gridContainer(
-    ///     columns: .repeat(3, .fr(1)),
-    ///     rows: .auto,
-    ///     gap: .px(16)
-    /// )
-    /// ```
+
     @inlinable
     @discardableResult
     public func gridContainer(

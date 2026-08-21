@@ -1,8 +1,3 @@
-//
-//  Color.Theme.Text.swift
-//  swift-css
-//
-
 import CSS_Standard
 
 extension DarkModeColor.Theme {

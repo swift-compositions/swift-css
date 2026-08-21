@@ -1,10 +1,3 @@
-//
-//  BackgroundOrigin Tests.swift
-//  swift-html
-//
-//  Created by Claude AI on 11/04/2025.
-//
-
 import CSS_Test_Support
 import Testing
 

@@ -1,8 +1,3 @@
-//
-//  div.swift
-//  swift-css
-//
-
 import CSS_Test_Support
 import Testing
 

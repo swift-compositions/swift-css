@@ -1,18 +1,9 @@
-//
-//  DarkModeColor Tests.swift
-//  swift-css
-//
-//  Tests for DarkModeColor type and its operations.
-//
-
 import CSS
 import CSS_Theming
 import Testing
 
 @Suite
 struct `DarkModeColor Tests` {
-
-    // MARK: - Construction
 
     @Test
     func `Color initializes with standard color using diagonal embedding`() {
@@ -46,8 +37,6 @@ struct `DarkModeColor Tests` {
         #expect(color.isSingleColor == true)
     }
 
-    // MARK: - Description
-
     @Test
     func `Single color description shows just the color`() {
         let color = DarkModeColor(.hex("FF0000"))
@@ -66,8 +55,6 @@ struct `DarkModeColor Tests` {
         #expect(description.contains("@media (prefers-color-scheme: dark)"))
         #expect(description.contains("#00FF00"))
     }
-
-    // MARK: - Functor Operations
 
     @Test
     func `map transforms both light and dark colors`() {
@@ -105,8 +92,6 @@ struct `DarkModeColor Tests` {
         #expect(transformed.light.description == "#0000FF")
         #expect(transformed.dark.description == "#FF00FF")
     }
-
-    // MARK: - Color Manipulation
 
     @Test
     func `adjustBrightness changes color brightness`() {
@@ -151,8 +136,6 @@ struct `DarkModeColor Tests` {
         #expect(faded.light != color.light)
         #expect(faded.dark != color.dark)
     }
-
-    // MARK: - Convenience Methods
 
     @Test
     func `withDarkColor creates new DarkModeColor with specified dark`() {

@@ -1,10 +1,3 @@
-//
-//  Background Tests.swift
-//  swift-html
-//
-//  Created by Claude AI on 11/04/2025.
-//
-
 import CSS_Test_Support
 import Testing
 
@@ -58,32 +51,6 @@ extension `Snapshot Tests` {
                 """
             }
         }
-
-        //    @Test
-        //    func htmlElementWithComplexBackgroundRendersCorrectly() throws {
-        //        assertInlineSnapshot(
-        //            of: HTML.Document {
-        //                div.css.background(.composite([.color(.red), .image(.url(.init("https://example.com/image.png"))]))
-        //            },
-        //            as: .html
-        //        ) {
-        //            """
-        //            <!doctype html>
-        //            <html>
-        //              <head>
-        //                <style>
-        //            .background-yFkjt1{background:red url}
-        //
-        //                </style>
-        //              </head>
-        //              <body>
-        //            <div class="background-yFkjt1">
-        //            </div>
-        //              </body>
-        //            </html>
-        //            """
-        //        }
-        //    }
 
         @Test
         func `HTML background with none value renders properly`() throws {

@@ -1,18 +1,9 @@
-//
-//  DarkModeColor Theme Tests.swift
-//  swift-css
-//
-//  Tests for DarkModeColor.Theme and scoped theming.
-//
-
 import CSS
 import CSS_Theming
 import Testing
 
 @Suite
 struct `DarkModeColor Theme Tests` {
-
-    // MARK: - Theme Access
 
     @Test
     func `default theme provides all required colors`() {
@@ -48,8 +39,6 @@ struct `DarkModeColor Theme Tests` {
         #expect(branding.primary.light != branding.primary.dark)
     }
 
-    // MARK: - Scoped Theming
-
     @Test
     func `withDependencies overrides theme in scope`() {
         let defaultRed = DarkModeColor.red
@@ -58,18 +47,14 @@ struct `DarkModeColor Theme Tests` {
             $0.theme = .github
         } operation: {
             let githubRed = DarkModeColor.red
-            // The github theme may or may not differ, but the mechanism works
-            // The point is that the scoped value is read without crash
+
             _ = githubRed
         }
 
-        // After scope, theme returns to default
         let afterRed = DarkModeColor.red
         #expect(afterRed.light == defaultRed.light)
         #expect(afterRed.dark == defaultRed.dark)
     }
-
-    // MARK: - Named Static Colors
 
     @Test(
         arguments: [

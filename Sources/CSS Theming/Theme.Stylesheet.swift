@@ -1,14 +1,7 @@
-//
-//  Theme.Stylesheet.swift
-//  swift-html
-//
-//  Generates CSS stylesheet from DarkModeColor.Theme
-//
-
 import CSS
 
 extension DarkModeColor.Theme {
-    /// Generates a CSS stylesheet with all theme colors as CSS custom properties
+
     public var stylesheet: StyleSheet {
         DarkModeColor.Theme.StyleSheet(theme: self)
     }

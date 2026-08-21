@@ -1,10 +1,3 @@
-//
-//  File.swift
-//  coenttb-html
-//
-//  Created by Coen ten Thije Boonkkamp on 12/03/2025.
-//
-
 import CSS_Standard
 import Synchronization
 
@@ -35,21 +28,15 @@ extension DarkModeColor {
 }
 
 extension DarkModeColor.Theme {
-    /// Global prepared value (set via `prepareDependencies`).
-    ///
-    /// Guarded by a `Mutex` so concurrent `_prepare` writes and `current` reads
-    /// never observe a torn (partially-written) theme value.
+
     private static let _preparedStorage: Mutex<DarkModeColor.Theme> = Mutex(.default)
 
-    /// Scoped override (set via `withDependencies`)
     @TaskLocal private static var _scoped: DarkModeColor.Theme? = nil
 
-    /// Current theme value. Returns scoped override if set, otherwise prepared value.
     public static var current: DarkModeColor.Theme {
         _scoped ?? _preparedStorage.withLock { $0 }
     }
 
-    /// Set the global prepared value.
     public static func _prepare(_ value: DarkModeColor.Theme) {
         _preparedStorage.withLock { $0 = value }
     }
@@ -118,28 +105,15 @@ extension DarkModeColor {
     public static let buttonBackground: Self = .cardBackground
 }
 
-// MARK: - Convenience API for setting theme
-
 extension DarkModeColor.Theme {
-    /// Execute an operation with a custom theme.
-    ///
-    /// Usage:
-    /// ```swift
-    /// DarkModeColor.Theme.withValue(.github) {
-    ///     // Code here sees .github theme
-    /// }
-    /// ```
+
     public static func withValue<R, Failure: Swift.Error>(
         _ theme: DarkModeColor.Theme,
         operation: () throws(Failure) -> R
     ) throws(Failure) -> R {
-        // `TaskLocal.withValue` is untyped `rethrows`, so the error is bridged back
-        // to `Failure` explicitly; `operation` is the sole throwing source, so the
-        // downcast always succeeds.
+
         let result: Result<R, Failure>
-        // swift-linter:disable:next do throws for typed catch
-        // REASON: Synchronization.TaskLocal.withValue(_:operation:) is a cross-module
-        // stdlib API declared untyped `rethrows`; there is no `E` to name in `do throws(E)`.
+
         do {
             result = .success(try $_scoped.withValue(theme, operation: operation))
         } catch {
@@ -155,18 +129,15 @@ extension DarkModeColor.Theme {
         return try result.get()
     }
 
-    /// Execute an async operation with a custom theme.
     nonisolated(nonsending)
         public static func withValue<R, Failure: Swift.Error>(
             _ theme: DarkModeColor.Theme,
             operation: nonisolated(nonsending) () async throws(Failure) -> R
         ) async throws(Failure) -> R
     {
-        // See the sync overload above for why the error is bridged explicitly.
+
         let result: Result<R, Failure>
-        // swift-linter:disable:next do throws for typed catch
-        // REASON: Synchronization.TaskLocal.withValue(_:operation:) is a cross-module
-        // stdlib API declared untyped `rethrows`; there is no `E` to name in `do throws(E)`.
+
         do {
             result = .success(try await $_scoped.withValue(theme, operation: operation))
         } catch {

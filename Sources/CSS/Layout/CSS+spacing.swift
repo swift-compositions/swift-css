@@ -1,23 +1,9 @@
-//
-//  CSS+spacing.swift
-//  swift-css
-//
-//  Convenience method for spacing properties (padding and margin together).
-//
-
 public import CSS_HTML_Rendering
 import CSS_Standard
 import HTML_Rendering
 
 extension HTML.CSS {
-    /// Convenience method for spacing properties (padding and margin together).
-    ///
-    /// ```swift
-    /// div.css.spacing(
-    ///     padding: .px(16),
-    ///     margin: .auto
-    /// )
-    /// ```
+
     @inlinable
     @discardableResult
     public func spacing(

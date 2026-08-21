@@ -1,16 +1,9 @@
-//
-//  CSS+borderBlockStartColor.swift
-//  swift-css
-//
-//  CSS border-block-start-color property with dark mode support.
-//
-
 public import CSS_HTML_Rendering
 public import CSS_Standard
 import HTML_Rendering
 
 extension HTML.CSS {
-    /// Sets the border block start color using a DarkModeColor value.
+
     @discardableResult
     @CSS_HTML_Rendering.CSS.Builder
     public func borderBlockStartColor(
@@ -32,7 +25,6 @@ extension HTML.CSS {
         }
     }
 
-    /// Sets the border block start color using separate light and dark color values.
     @discardableResult
     public func borderBlockStartColor(
         light: CSS_Standard.Color.Value,

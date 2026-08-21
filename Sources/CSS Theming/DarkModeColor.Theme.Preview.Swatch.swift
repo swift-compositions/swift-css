@@ -1,25 +1,14 @@
-//
-//  DarkModeColor.Theme.Preview.Swatch.swift
-//  swift-css
-//
-//  Created by Coen ten Thije Boonkkamp on 12/09/2025.
-//
-
 #if canImport(SwiftUI)
     import SwiftUI
 
     extension DarkModeColor.Theme.Preview {
-        /// Individual color swatch showing the color and its name
+
         struct Swatch: View {
             let name: String
             let htmlColor: DarkModeColor
             let colorScheme: SwiftUI.ColorScheme
             @State private var isHovering = false
 
-            // Explicit memberwise initializer: the synthesized one would be
-            // `private` because `isHovering` is a private stored property,
-            // making the type uninitializable from sibling files in the
-            // same target (e.g. `DarkModeColor.Theme.Preview.Section`).
             init(name: String, htmlColor: DarkModeColor, colorScheme: SwiftUI.ColorScheme) {
                 self.name = name
                 self.htmlColor = htmlColor
@@ -43,7 +32,13 @@
                 return unsafe String(format: "#%02X%02X%02X", Int(r), Int(g), Int(b))
 
             case .rgba(let r, let g, let b, let a):
-                return unsafe String(format: "#%02X%02X%02X%02X", Int(r), Int(g), Int(b), Int(a * 255))
+                return unsafe String(
+                    format: "#%02X%02X%02X%02X",
+                    Int(r),
+                    Int(g),
+                    Int(b),
+                    Int(a * 255)
+                )
 
             default:
                 return cssColor.description
@@ -63,7 +58,7 @@
                         Text(isHovering ? hexValue : "")
                             .font(.caption.monospaced())
                             .foregroundColor(
-                                // Determine text color based on background brightness
+
                                 isLightColor(swiftUIColor) ? .black : .white
                             )
                             .padding(4)
@@ -89,10 +84,8 @@
             }
         }
 
-        /// Determine if a color is light or dark for text contrast
         func isLightColor(_ color: SwiftUI.Color) -> Bool {
-            // This is a simplified brightness calculation
-            // In production, you'd want to extract RGB values properly
+
             return colorScheme == .light
                 && (htmlColor.light.description.contains("fff")
                     || htmlColor.light.description.contains("white"))

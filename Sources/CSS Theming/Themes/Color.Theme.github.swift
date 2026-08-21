@@ -1,10 +1,3 @@
-//
-//  Color.Theme.github.swift
-//  coenttb-html
-//
-//  Created by Coen ten Thije Boonkkamp on 09/08/2025.
-//
-
 extension DarkModeColor.Theme {
     public static var github: Self {
         .init(
