@@ -7,7 +7,7 @@
 
 public import CSS_HTML_Rendering
 public import CSS_Standard
-public import HTML_Rendering
+import HTML_Rendering
 
 extension HTML.CSS {
     /// Convenience method for sizing properties (width, height, min/max).

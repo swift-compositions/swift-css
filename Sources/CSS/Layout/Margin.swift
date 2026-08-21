@@ -6,8 +6,8 @@
 //
 
 public import CSS_HTML_Rendering
-public import CSS_Standard
-public import HTML_Rendering
+import CSS_Standard
+import HTML_Rendering
 
 extension Margin {
     public typealias Variant = Side

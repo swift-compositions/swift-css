@@ -7,7 +7,7 @@
 
 public import CSS_HTML_Rendering
 public import CSS_Standard
-public import HTML_Rendering
+import HTML_Rendering
 
 extension HTML.CSS {
     /// Sets the border block end color using a DarkModeColor value.

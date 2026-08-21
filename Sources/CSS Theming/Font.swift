@@ -7,7 +7,7 @@
 
 public import CSS
 public import CSS_Standard
-public import HTML_Rendering
+import HTML_Rendering
 
 public struct Font: Hashable, Sendable {
     public let family: CSS_Standard.FontFamily

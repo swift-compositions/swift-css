@@ -7,7 +7,7 @@
 
 public import CSS_HTML_Rendering
 public import CSS_Standard
-public import HTML_Rendering
+import HTML_Rendering
 public import W3C_CSS_Values
 
 extension HTML.CSS {
