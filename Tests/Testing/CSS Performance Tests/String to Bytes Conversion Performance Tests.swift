@@ -144,14 +144,14 @@ extension `Performance Tests` {
 
         @Test(.timed(threshold: .seconds(2)))
         func `allocation - String creation 10K times`() {
-            for i in 0..<10_000 {
+            (0..<10_000).forEach { i in
                 _ = "rgb(\(i % 256), 128, 64)"
             }
         }
 
         @Test(.timed(threshold: .seconds(2)))
         func `allocation - String → Bytes array 10K times`() {
-            for i in 0..<10_000 {
+            (0..<10_000).forEach { i in
                 let str = "rgb(\(i % 256), 128, 64)"
                 _ = Array(str.utf8)
             }
@@ -159,7 +159,7 @@ extension `Performance Tests` {
 
         @Test(.timed(threshold: .seconds(2)))
         func `allocation - ContiguousArray bytes 10K times`() {
-            for i in 0..<10_000 {
+            (0..<10_000).forEach { i in
                 var bytes = ContiguousArray<UInt8>()
                 bytes.append(contentsOf: "rgb(".utf8)
                 bytes.append(contentsOf: String(i % 256).utf8)
@@ -202,7 +202,7 @@ extension `Performance Tests` {
 
         @Test(.timed(threshold: .seconds(2)))
         func `cache - different properties each iteration 5K times`() {
-            for i in 0..<5_000 {
+            (0..<5_000).forEach { i in
                 let prop = BackgroundColor.color(
                     .rgb(
                         (i * 23) % 256,
