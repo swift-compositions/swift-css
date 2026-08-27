@@ -44,7 +44,7 @@ print(stylesheet)
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/swift-foundations/swift-css.git", branch: "main")
+    .package(url: "https://github.com/swift-compositions/swift-css.git", branch: "main")
 ]
 ```
 

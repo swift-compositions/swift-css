@@ -48,14 +48,14 @@ let package = Package(
     ],
     dependencies: [
         .package(
-            url: "https://github.com/swift-foundations/swift-css-html-render.git",
+            url: "https://github.com/swift-compositions/swift-css-html-render.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-foundations/swift-css-html-layout-render.git",
+            url: "https://github.com/swift-compositions/swift-css-html-layout-render.git",
             branch: "main"
         ),
-        .package(url: "https://github.com/swift-foundations/swift-html-render.git", branch: "main"),
+        .package(url: "https://github.com/swift-compositions/swift-html-render.git", branch: "main"),
         .package(url: "https://github.com/swift-standards/swift-css-standard.git", branch: "main"),
     ],
     targets: [
