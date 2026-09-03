@@ -2,32 +2,6 @@
 
 import PackageDescription
 
-extension String {
-    static let css: Self = "CSS"
-    static let cssTheming: Self = "CSS Theming"
-    var tests: Self { self + " Tests" }
-}
-
-extension Target.Dependency {
-    static var css: Self { .target(name: .css) }
-    static var cssTheming: Self { .target(name: .cssTheming) }
-}
-
-extension Target.Dependency {
-    static var cssStandard: Self {
-        .product(name: "CSS Standard", package: "swift-css-standard")
-    }
-    static var cssHTMLRendering: Self {
-        .product(name: "CSS HTML Rendering", package: "swift-css-html-render")
-    }
-    static var cssHTMLLayoutRendering: Self {
-        .product(name: "CSS HTML Layout Rendering", package: "swift-css-html-layout-render")
-    }
-    static var htmlRendering: Self {
-        .product(name: "HTML Rendering", package: "swift-html-render")
-    }
-}
-
 let package = Package(
     name: "swift-css",
     platforms: [
@@ -38,8 +12,8 @@ let package = Package(
         .visionOS(.v27),
     ],
     products: [
-        .library(name: .css, targets: [.css]),
-        .library(name: .cssTheming, targets: [.cssTheming]),
+        .library(name: "CSS", targets: ["CSS"]),
+        .library(name: "CSS Theming", targets: ["CSS Theming"]),
         .library(
             name: "CSS Theming Foundation Integration",
             targets: ["CSS Theming Foundation Integration"]
@@ -60,42 +34,42 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: .css,
+            name: "CSS",
             dependencies: [
-                .cssHTMLRendering,
-                .cssHTMLLayoutRendering,
-                .htmlRendering,
-                .cssStandard,
+                .product(name: "CSS HTML Rendering", package: "swift-css-html-render"),
+                .product(name: "CSS HTML Layout Rendering", package: "swift-css-html-layout-render"),
+                .product(name: "HTML Rendering", package: "swift-html-render"),
+                .product(name: "CSS Standard", package: "swift-css-standard"),
             ]
         ),
         .target(
-            name: .cssTheming,
+            name: "CSS Theming",
             dependencies: [
-                .css,
-                .htmlRendering,
-                .cssStandard,
+                .target(name: "CSS"),
+                .product(name: "HTML Rendering", package: "swift-html-render"),
+                .product(name: "CSS Standard", package: "swift-css-standard"),
             ]
         ),
         .target(
             name: "CSS Theming Foundation Integration",
             dependencies: [
-                .cssTheming
+                .target(name: "CSS Theming")
             ]
         ),
         .target(
             name: "CSS Test Support",
             dependencies: [
-                .css,
-                .cssTheming,
+                .target(name: "CSS"),
+                .target(name: "CSS Theming"),
                 .product(name: "HTML Rendering Core Test Support", package: "swift-html-render"),
             ],
             path: "Tests/Support"
         ),
         .testTarget(
-            name: .css.tests,
+            name: "CSS Tests",
             dependencies: [
-                .css,
-                .cssTheming,
+                .target(name: "CSS"),
+                .target(name: "CSS Theming"),
             ],
             path: "Tests/CSS Tests"
         ),
