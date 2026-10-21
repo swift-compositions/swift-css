@@ -30,17 +30,16 @@ extension HTML.CSS {
                     let ctx = HTML.Style.Rule.Context.current
                     let darkMedia = W3C_CSS_MediaQueries.Media.prefersColorScheme(.dark)
                     let darkAtRule: HTML.AtRule = {
-                        if let existingAtRule = ctx.atRule {
-
-                            let combined = darkMedia.and(
-
-                                W3C_CSS_MediaQueries.Media(rawValue: existingAtRule.rawValue)
-                            )
-
-                            return HTML.AtRule(rawValue: combined.rawValue)
-                        } else {
+                        guard let existingAtRule = ctx.atRule else {
                             return HTML.AtRule.Media(darkMedia)
                         }
+
+                        let combined = darkMedia.and(
+
+                            W3C_CSS_MediaQueries.Media(rawValue: existingAtRule.rawValue)
+                        )
+
+                        return HTML.AtRule(rawValue: combined.rawValue)
                     }()
 
                     HTML.Styled(
@@ -163,17 +162,16 @@ extension HTML.View {
                 let ctx = HTML.Style.Rule.Context.current
                 let darkMedia = W3C_CSS_MediaQueries.Media.prefersColorScheme(.dark)
                 let darkAtRule: HTML.AtRule = {
-                    if let existingAtRule = ctx.atRule {
-
-                        let combined = darkMedia.and(
-
-                            W3C_CSS_MediaQueries.Media(rawValue: existingAtRule.rawValue)
-                        )
-
-                        return HTML.AtRule(rawValue: combined.rawValue)
-                    } else {
+                    guard let existingAtRule = ctx.atRule else {
                         return HTML.AtRule.Media(darkMedia)
                     }
+
+                    let combined = darkMedia.and(
+
+                        W3C_CSS_MediaQueries.Media(rawValue: existingAtRule.rawValue)
+                    )
+
+                    return HTML.AtRule(rawValue: combined.rawValue)
                 }()
 
                 HTML.Styled(

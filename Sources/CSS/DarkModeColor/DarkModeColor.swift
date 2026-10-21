@@ -99,12 +99,11 @@ extension CSS_Standard.Color.Value {
 
 extension DarkModeColor: CustomStringConvertible {
     public var description: String {
-        if isSingleColor {
+        guard !isSingleColor else {
             return light.description
-        } else {
-            let attribute = CSS_Standard.Color.property
-            return
-                "@media (prefers-color-scheme: light) { \(attribute):\(light) } @media (prefers-color-scheme: dark) { \(attribute):\(dark) }"
         }
+        let attribute = CSS_Standard.Color.property
+        return
+            "@media (prefers-color-scheme: light) { \(attribute):\(light) } @media (prefers-color-scheme: dark) { \(attribute):\(dark) }"
     }
 }

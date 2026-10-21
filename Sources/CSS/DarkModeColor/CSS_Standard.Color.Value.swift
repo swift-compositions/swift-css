@@ -335,19 +335,17 @@ extension CSS_Standard.Color.Value {
         guard percent >= -1, percent <= 1 else { return self }
 
         func adjustComponent(_ value: Int) -> Int {
-            if percent > 0 {
-                return min(255, max(0, Int(Double(value) + (255 - Double(value)) * percent)))
-            } else {
+            guard percent > 0 else {
                 return max(0, min(255, Int(Double(value) * (1 + percent))))
             }
+            return min(255, max(0, Int(Double(value) + (255 - Double(value)) * percent)))
         }
 
         func adjustLightness(_ l: Double) -> Double {
-            if percent > 0 {
-                return min(100, max(0, l + (100 - l) * percent))
-            } else {
+            guard percent > 0 else {
                 return max(0, min(100, l * (1 + percent)))
             }
+            return min(100, max(0, l + (100 - l) * percent))
         }
 
         switch self {
