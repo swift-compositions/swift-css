@@ -1,84 +1,20 @@
 # swift-css
 
-![Development Status](https://img.shields.io/badge/status-active--development-blue.svg)
+Use this package when you style HTML views in Swift with typed CSS and want colors that switch with dark mode, grouped layout helpers, and a color and font theme you can swap. Start from `DarkModeColor` for a light and dark color pair. For named palettes and font defaults, start from `DarkModeColor.Theme` and `Font.Defaults` in the `CSS Theming` product. If you only need the typed `.css` property methods on HTML views, use swift-css-html-render. If you only need CSS values without rendering, use swift-css-standard.
 
-Typed CSS for Swift HTML rendering — inline style methods, dark-mode color pairs, and named themes that emit light and dark CSS custom properties.
+## Laws
 
----
-
-## Key Features
-
-- **Grouped property methods** — `.css.frame(...)`, `.css.spacing(...)`, `.css.text(...)`, and `.css.flexContainer(...)` set related CSS properties in a single call and render as HTML inline styles.
-- **Dark-mode colors** — `DarkModeColor` stores light and dark values as one normalized pair, auto-deriving the dark variant when only a light color is supplied.
-- **Named themes** — `DarkModeColor.Theme` ships palettes mirroring familiar systems (`.github`, `.apple`, `.vapor`, `.slate`, and more), each exposing semantic `text`, `background`, `border`, and `branding` color roles.
-- **Stylesheet generation** — `theme.stylesheet` emits CSS custom properties for every role, paired with a `@media (prefers-color-scheme: dark)` override block and matching utility classes.
-- **Scoped theming** — `prepareDependencies` sets process-wide theme and font defaults; `withDependencies` overrides them for a single synchronous or asynchronous operation.
-
----
-
-## Quick Start
-
-A single named theme value expands into a complete stylesheet — every semantic color as a CSS custom property, plus a `@media (prefers-color-scheme: dark)` block carrying the dark variants:
-
-```swift
-import CSS_Theming
-
-let stylesheet = DarkModeColor.Theme.github.stylesheet
-
-print(stylesheet)
-// /* Generated Theme Stylesheet */
-// :root {
-//     --color-blue: ...;
-//     --text-primary: ...;
-// }
-// @media (prefers-color-scheme: dark) {
-//     :root { --color-blue: ...; }
-// }
-```
-
-`DarkModeColor.Theme.StyleSheet` conforms to `CustomStringConvertible`, so it interpolates into any output directly.
-
----
-
-## Installation
-
-```swift
-dependencies: [
-    .package(url: "https://github.com/swift-compositions/swift-css.git", branch: "main")
-]
-```
-
-```swift
-.target(
-    name: "YourTarget",
-    dependencies: [
-        .product(name: "CSS", package: "swift-css")
-    ]
-)
-```
-
-Requires Swift 6.3.1 and macOS 26 / iOS 26 / tvOS 26 / watchOS 26 / visionOS 26.
-
----
-
-## Architecture
-
-Three library products. `CSS Theming` and `CSS Test Support` re-export `CSS`.
-
-| Product | Import | When to import |
-|---------|--------|----------------|
-| `CSS` | `import CSS` | Inline CSS property methods and the dark-mode color types. |
-| `CSS Theming` | `import CSS_Theming` | Named themes, stylesheet generation, and scoped theming defaults; re-exports `CSS`. |
-| `CSS Test Support` | `import CSS_Test_Support` | Test targets that snapshot rendered CSS; re-exports both library targets. |
-
----
-
-## Community
-
-<!-- BEGIN: discussion -->
-*Discussion thread will be created at first public release.*
-<!-- END: discussion -->
-
-## License
-
-Apache 2.0. See [LICENSE](LICENSE.md).
+- `DarkModeColor.init(light:dark:)` without a dark value uses the light value darkened by 20%. `DarkModeColor.init(_:)` uses one value for both.
+- A `DarkModeColor` whose light and dark values are equal renders as one declaration. Otherwise the light value is the declaration and the dark value is added under `@media (prefers-color-scheme: dark)`. For `HTML.CSS.border(_:)`, that dark rule is combined with any media query already in effect.
+- `DarkModeColor.flatMap(_:)` takes the light value from the transform of the light value and the dark value from the transform of the dark value.
+- `DarkModeColor.darker(by:)` and `DarkModeColor.lighter(by:)` default to 20%, as do the same methods on `CSS_Standard.Color.Value`. Darker scales each RGB channel toward 0, lighter moves it toward 255 by that fraction, and HSL colors change lightness the same way. Hex and named colors come back as `rgb()`. A fraction outside -1 to 1 leaves the color unchanged.
+- `DarkModeColor.opacity(_:)` clamps alpha to 0 through 1. Hex and named colors become `rgba()`, HSL becomes `hsla()`.
+- Only the 16 basic CSS named colors, such as red, navy and teal, can be lightened, darkened or made translucent. Any other named color, and any other color form, is returned unchanged.
+- `DarkModeColor.Theme.current` is the theme set by the innermost `withDependencies(_:operation:)` from `CSS Theming`, else the one set by `prepareDependencies(_:)`, else `DarkModeColor.Theme.default`. `Font.Defaults.current` works the same way. Both functions start from the current theme and fonts, so you change only what you set. They are this package's own and don't read or change swift-dependencies values.
+- Scoped themes and fonts are task-local. Prepared ones are process-wide, and a reader never sees half of one prepared value and half of another.
+- Theme colors such as `DarkModeColor.red` and fonts such as `Font.body` read the current theme on every access. Fixed shades such as `DarkModeColor.red500` don't depend on the theme.
+- A theme role left out falls back to a related one. Button hover falls back to the button color, muted error, success and warning to their full colors, info to the highlighted color (the link color for text), border hover to highlighted, and neutral to secondary.
+- `DarkModeColor.Theme.stylesheet` puts each light value in a `:root` variable and the dark value in the same variable under `@media (prefers-color-scheme: dark)`. Each base color also gets a translucent variant at 20% opacity.
+- `DarkModeColor.Theme.StyleSheet.write(to:name:)` creates the directory if needed and writes to the directory string followed directly by the name and `.css`, so the directory must end with a slash.
+- `HTML.CSS.margin(top:right:bottom:left:)` and `HTML.CSS.padding(top:right:bottom:left:)` write one shorthand when all four sides are given, using the shortest form. Otherwise each given side is written on its own. A margin with only left and right, and both equal, is written as a shorthand with 0px top and bottom, which overrides any vertical margin set elsewhere.
+- `HTML.CSS.listStyle(_:)` with reset removes list markers and sets left padding to 0.
