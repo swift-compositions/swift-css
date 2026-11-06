@@ -2,7 +2,9 @@ import CSS
 import CSS_Theming
 import Testing
 
-extension CSS_Theming.Font.Defaults {
+enum `CSS_Theming.Font.Defaults Tests` {}
+
+extension `CSS_Theming.Font.Defaults Tests` {
     @Suite
     struct `Edge Case` {
 

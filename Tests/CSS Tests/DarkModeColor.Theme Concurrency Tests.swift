@@ -2,7 +2,9 @@ import CSS
 import CSS_Theming
 import Testing
 
-extension DarkModeColor.Theme {
+enum `DarkModeColor.Theme Tests` {}
+
+extension `DarkModeColor.Theme Tests` {
     @Suite
     struct `Edge Case` {
 

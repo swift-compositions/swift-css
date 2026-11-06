@@ -2,7 +2,9 @@ import CSS
 import CSS_Theming
 import Testing
 
-extension DarkModeColor.Theme.StyleSheet {
+enum `DarkModeColor.Theme.StyleSheet Tests` {}
+
+extension `DarkModeColor.Theme.StyleSheet Tests` {
     @Suite
     struct `Translucent Variables Stay Valid CSS` {
 
