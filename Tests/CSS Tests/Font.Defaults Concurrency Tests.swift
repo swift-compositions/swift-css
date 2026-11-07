@@ -10,9 +10,9 @@ extension `CSS_Theming.Font.Defaults Tests` {
 
         @Test
         func `prepare and current never observe a torn value under concurrent access`() async {
-            let snapshotA: CSS_Theming.Font.Defaults = {
-                var defaults = CSS_Theming.Font.Defaults.default
-                let marker = CSS_Theming.Font(
+            let snapshotA: CSS_Theming::Font.Defaults = {
+                var defaults = CSS_Theming::Font.Defaults.default
+                let marker = CSS_Theming::Font(
                     family: .systemUi,
                     size: .rem(1),
                     stretch: .normal,
@@ -26,9 +26,9 @@ extension `CSS_Theming.Font.Defaults Tests` {
                 return defaults
             }()
 
-            let snapshotB: CSS_Theming.Font.Defaults = {
-                var defaults = CSS_Theming.Font.Defaults.default
-                let marker = CSS_Theming.Font(
+            let snapshotB: CSS_Theming::Font.Defaults = {
+                var defaults = CSS_Theming::Font.Defaults.default
+                let marker = CSS_Theming::Font(
                     family: .systemUi,
                     size: .rem(2),
                     stretch: .normal,
@@ -42,19 +42,19 @@ extension `CSS_Theming.Font.Defaults Tests` {
                 return defaults
             }()
 
-            defer { CSS_Theming.Font.Defaults._prepare(.default) }
+            defer { CSS_Theming::Font.Defaults._prepare(.default) }
 
-            CSS_Theming.Font.Defaults._prepare(snapshotA)
+            CSS_Theming::Font.Defaults._prepare(snapshotA)
 
             await withTaskGroup(of: Void.self) { group in
                 for i in 0..<4_000 {
                     group.addTask {
-                        CSS_Theming.Font.Defaults._prepare(
+                        CSS_Theming::Font.Defaults._prepare(
                             i.isMultiple(of: 2) ? snapshotA : snapshotB
                         )
                     }
                     group.addTask {
-                        let observed = CSS_Theming.Font.Defaults.current
+                        let observed = CSS_Theming::Font.Defaults.current
                         let matchesA =
                             observed.title == snapshotA.title && observed.body == snapshotA.body
                         let matchesB =

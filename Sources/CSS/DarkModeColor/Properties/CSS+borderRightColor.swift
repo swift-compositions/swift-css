@@ -5,24 +5,24 @@ import HTML_Rendering
 extension HTML.CSS {
 
     @discardableResult
-    @CSS_HTML_Rendering.CSS.Builder
+    @CSS_HTML_Rendering::CSS.Builder
     public func borderRightColor(
         _ darkModeColor: DarkModeColor
     ) -> HTML.CSS<some HTML.View> {
         if darkModeColor.isSingleColor {
-            self.borderRightColor(CSS_Standard.BorderRightColor.color(darkModeColor.light))
+            self.borderRightColor(CSS_Standard::BorderRightColor.color(darkModeColor.light))
         } else {
-            self.borderRightColor(CSS_Standard.BorderRightColor.color(darkModeColor.light))
+            self.borderRightColor(CSS_Standard::BorderRightColor.color(darkModeColor.light))
                 .dark {
-                    $0.borderRightColor(CSS_Standard.BorderRightColor.color(darkModeColor.dark))
+                    $0.borderRightColor(CSS_Standard::BorderRightColor.color(darkModeColor.dark))
                 }
         }
     }
 
     @discardableResult
     public func borderRightColor(
-        light: CSS_Standard.Color.Value,
-        dark: CSS_Standard.Color.Value
+        light: CSS_Standard::Color.Value,
+        dark: CSS_Standard::Color.Value
     ) -> HTML.CSS<some HTML.View> {
         borderRightColor(DarkModeColor(light: light, dark: dark))
     }

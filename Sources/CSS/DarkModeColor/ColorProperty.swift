@@ -5,22 +5,22 @@ public typealias ColorProperty = WithGlobal<DarkModeColor>
 extension ColorProperty {
 
     @inlinable
-    public static func single(_ color: CSS_Standard.Color.Value) -> ColorProperty {
+    public static func single(_ color: CSS_Standard::Color.Value) -> ColorProperty {
         .value(DarkModeColor(color))
     }
 
     @inlinable
     public static func adaptive(
-        light: CSS_Standard.Color.Value,
-        dark: CSS_Standard.Color.Value
+        light: CSS_Standard::Color.Value,
+        dark: CSS_Standard::Color.Value
     ) -> ColorProperty {
         .value(DarkModeColor(light: light, dark: dark))
     }
 
     @inlinable
     public static func autoAdaptive(
-        light: CSS_Standard.Color.Value,
-        dark: CSS_Standard.Color.Value? = nil
+        light: CSS_Standard::Color.Value,
+        dark: CSS_Standard::Color.Value? = nil
     ) -> ColorProperty {
         .value(DarkModeColor(light: light, dark: dark))
     }
@@ -37,12 +37,12 @@ extension DarkModeColor: ColorPropertyConvertible {
     static let injection: @Sendable (DarkModeColor) -> ColorProperty = { .value($0) }
 }
 
-extension CSS_Standard.Color.Value: ColorPropertyConvertible {
+extension CSS_Standard::Color.Value: ColorPropertyConvertible {
     @usableFromInline
-    static let injection: @Sendable (CSS_Standard.Color.Value) -> ColorProperty = { .single($0) }
+    static let injection: @Sendable (CSS_Standard::Color.Value) -> ColorProperty = { .single($0) }
 }
 
-extension CSS_Standard.Global: ColorPropertyConvertible {
+extension CSS_Standard::Global: ColorPropertyConvertible {
     @usableFromInline
-    static let injection: @Sendable (CSS_Standard.Global) -> ColorProperty = { .global($0) }
+    static let injection: @Sendable (CSS_Standard::Global) -> ColorProperty = { .global($0) }
 }

@@ -2,21 +2,21 @@ public import CSS_Standard
 
 public struct DarkModeColor: Sendable, Hashable, ColorConvertible {
 
-    public let light: CSS_Standard.Color.Value
+    public let light: CSS_Standard::Color.Value
 
-    public let dark: CSS_Standard.Color.Value
+    public let dark: CSS_Standard::Color.Value
 
     @inlinable
     public init(
-        light: CSS_Standard.Color.Value,
-        dark: CSS_Standard.Color.Value? = nil
+        light: CSS_Standard::Color.Value,
+        dark: CSS_Standard::Color.Value? = nil
     ) {
         self.light = light
         self.dark = dark ?? light.darker()
     }
 
     @inlinable
-    public init(_ color: CSS_Standard.Color.Value) {
+    public init(_ color: CSS_Standard::Color.Value) {
         self.light = color
         self.dark = color
     }
@@ -39,7 +39,7 @@ extension DarkModeColor {
 
     @inlinable
     public func map(
-        _ transform: (CSS_Standard.Color.Value) -> CSS_Standard.Color.Value
+        _ transform: (CSS_Standard::Color.Value) -> CSS_Standard::Color.Value
     ) -> DarkModeColor {
         DarkModeColor(
             light: transform(light),
@@ -48,7 +48,7 @@ extension DarkModeColor {
     }
 
     @inlinable
-    public func flatMap(_ transform: (CSS_Standard.Color.Value) -> DarkModeColor) -> DarkModeColor {
+    public func flatMap(_ transform: (CSS_Standard::Color.Value) -> DarkModeColor) -> DarkModeColor {
         let lightTransformed = transform(light)
         let darkTransformed = transform(dark)
         return DarkModeColor(
@@ -84,15 +84,15 @@ extension DarkModeColor {
 extension DarkModeColor {
 
     @inlinable
-    public func withDarkColor(_ dark: CSS_Standard.Color.Value) -> DarkModeColor {
+    public func withDarkColor(_ dark: CSS_Standard::Color.Value) -> DarkModeColor {
         DarkModeColor(light: self.light, dark: dark)
     }
 }
 
-extension CSS_Standard.Color.Value {
+extension CSS_Standard::Color.Value {
 
     @inlinable
-    public func withDarkColor(_ dark: CSS_Standard.Color.Value) -> DarkModeColor {
+    public func withDarkColor(_ dark: CSS_Standard::Color.Value) -> DarkModeColor {
         DarkModeColor(light: self, dark: dark)
     }
 }
@@ -102,7 +102,7 @@ extension DarkModeColor: CustomStringConvertible {
         guard !isSingleColor else {
             return light.description
         }
-        let attribute = CSS_Standard.Color.property
+        let attribute = CSS_Standard::Color.property
         return
             "@media (prefers-color-scheme: light) { \(attribute):\(light) } @media (prefers-color-scheme: dark) { \(attribute):\(dark) }"
     }

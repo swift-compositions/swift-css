@@ -10,7 +10,7 @@ extension HTML.CSS {
 
     @discardableResult
     @inlinable
-    @CSS_HTML_Rendering.CSS.Builder
+    @CSS_HTML_Rendering::CSS.Builder
     public func padding(
         top: LengthPercentage? = nil,
         right: LengthPercentage? = nil,
@@ -50,7 +50,7 @@ extension HTML.CSS {
 
     @discardableResult
     @inlinable
-    @CSS_HTML_Rendering.CSS.Builder
+    @CSS_HTML_Rendering::CSS.Builder
     public func padding(
         vertical: LengthPercentage? = nil,
         horizontal: LengthPercentage? = nil
@@ -77,7 +77,7 @@ extension HTML.CSS {
 
     @discardableResult
     @inlinable
-    @CSS_HTML_Rendering.CSS.Builder
+    @CSS_HTML_Rendering::CSS.Builder
     public func padding(
         top: LengthPercentage? = nil,
         horizontal: LengthPercentage? = nil,

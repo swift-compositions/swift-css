@@ -6,7 +6,7 @@ extension HTML.CSS {
 
     @inlinable
     @discardableResult
-    @CSS_HTML_Rendering.CSS.Builder
+    @CSS_HTML_Rendering::CSS.Builder
     public func text(
         align: TextAlign? = nil,
         decoration: TextDecoration? = nil,

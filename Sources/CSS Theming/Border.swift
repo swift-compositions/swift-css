@@ -4,13 +4,13 @@ public import CSS_Standard
 public struct Border: Equatable, Sendable {
     public var sides: Swift.Set<Side>?
     public var width: BorderWidth?
-    public var style: CSS_Standard.LineStyle?
+    public var style: CSS_Standard::LineStyle?
     public var color: DarkModeColor?
 
     public init(
         sides: Swift.Set<Side>? = nil,
         width: BorderWidth? = nil,
-        style: CSS_Standard.LineStyle? = .solid,
+        style: CSS_Standard::LineStyle? = .solid,
         color: DarkModeColor? = nil
     ) {
         self.width = width

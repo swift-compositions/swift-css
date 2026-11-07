@@ -1,6 +1,6 @@
 public import CSS_Standard
 
-extension CSS_Standard.Color.Value {
+extension CSS_Standard::Color.Value {
     public static let gray100 = Self.hex("1a1a1a")
     public static let gray150 = Self.hex("2a2a2a")
     public static let gray200 = Self.hex("3a3a3a")
@@ -20,7 +20,7 @@ extension CSS_Standard.Color.Value {
     public static let gray900 = Self.hex("f5f5f5")
 }
 
-extension CSS_Standard.Color.Value {
+extension CSS_Standard::Color.Value {
     public static let blue100 = Self.hex("001a33")
     public static let blue150 = Self.hex("001f3f")
     public static let blue200 = Self.hex("003366")
@@ -40,7 +40,7 @@ extension CSS_Standard.Color.Value {
     public static let blue900 = Self.hex("f0f8ff")
 }
 
-extension CSS_Standard.Color.Value {
+extension CSS_Standard::Color.Value {
     public static let green100 = Self.hex("002600")
     public static let green150 = Self.hex("003300")
     public static let green200 = Self.hex("004400")
@@ -60,7 +60,7 @@ extension CSS_Standard.Color.Value {
     public static let green900 = Self.hex("f0fff0")
 }
 
-extension CSS_Standard.Color.Value {
+extension CSS_Standard::Color.Value {
     public static let purple100 = Self.hex("1a0026")
     public static let purple150 = Self.hex("2a0033")
     public static let purple200 = Self.hex("3b0044")
@@ -80,7 +80,7 @@ extension CSS_Standard.Color.Value {
     public static let purple900 = Self.hex("f9f0ff")
 }
 
-extension CSS_Standard.Color.Value {
+extension CSS_Standard::Color.Value {
     public static let red100 = Self.hex("260000")
     public static let red150 = Self.hex("330000")
     public static let red200 = Self.hex("440000")
@@ -100,7 +100,7 @@ extension CSS_Standard.Color.Value {
     public static let red900 = Self.hex("fff0f0")
 }
 
-extension CSS_Standard.Color.Value {
+extension CSS_Standard::Color.Value {
     public static let yellow100 = Self.hex("262600")
     public static let yellow150 = Self.hex("333300")
     public static let yellow200 = Self.hex("444400")
@@ -120,7 +120,7 @@ extension CSS_Standard.Color.Value {
     public static let yellow900 = Self.hex("fffff0")
 }
 
-extension CSS_Standard.Color.Value {
+extension CSS_Standard::Color.Value {
     public static let orange100 = Self.hex("261300")
     public static let orange150 = Self.hex("331a00")
     public static let orange200 = Self.hex("442200")
@@ -140,7 +140,7 @@ extension CSS_Standard.Color.Value {
     public static let orange900 = Self.hex("fff4e6")
 }
 
-extension CSS_Standard.Color.Value {
+extension CSS_Standard::Color.Value {
     public static let teal100 = Self.hex("001a1a")
     public static let teal150 = Self.hex("003333")
     public static let teal200 = Self.hex("004444")
@@ -160,7 +160,7 @@ extension CSS_Standard.Color.Value {
     public static let teal900 = Self.hex("f0f8f8")
 }
 
-extension CSS_Standard.Color.Value {
+extension CSS_Standard::Color.Value {
     public static let cyan100 = Self.teal100
     public static let cyan150 = Self.teal150
     public static let cyan200 = Self.teal200
@@ -180,7 +180,7 @@ extension CSS_Standard.Color.Value {
     public static let cyan900 = Self.teal900
 }
 
-extension CSS_Standard.Color.Value {
+extension CSS_Standard::Color.Value {
     public static let pink100 = Self.hex("260013")
     public static let pink150 = Self.hex("33001a")
     public static let pink200 = Self.hex("440022")
@@ -200,7 +200,7 @@ extension CSS_Standard.Color.Value {
     public static let pink900 = Self.hex("fceff5")
 }
 
-extension CSS_Standard.Color.Value {
+extension CSS_Standard::Color.Value {
     public static let brown100 = Self.hex("261300")
     public static let brown150 = Self.hex("331a00")
     public static let brown200 = Self.hex("442200")
@@ -220,7 +220,7 @@ extension CSS_Standard.Color.Value {
     public static let brown900 = Self.hex("fef5f0")
 }
 
-extension CSS_Standard.Color.Value {
+extension CSS_Standard::Color.Value {
     public static let black = Self.hex("121212")
     public static let offBlack = Self.hex("171717")
     public static let white = Self.hex("FFFFFF")
@@ -239,17 +239,17 @@ extension CSS_Standard.Color.Value {
     public static let yellow = Self.yellow500
 }
 
-extension CSS_Standard.Color.Value {
+extension CSS_Standard::Color.Value {
 
-    public func darker(by percent: Double = 0.2) -> CSS_Standard.Color.Value {
+    public func darker(by percent: Double = 0.2) -> CSS_Standard::Color.Value {
         return adjustBrightness(by: -percent)
     }
 
-    public func lighter(by percent: Double = 0.2) -> CSS_Standard.Color.Value {
+    public func lighter(by percent: Double = 0.2) -> CSS_Standard::Color.Value {
         return adjustBrightness(by: percent)
     }
 
-    public func opacity(_ alpha: Double) -> CSS_Standard.Color.Value {
+    public func opacity(_ alpha: Double) -> CSS_Standard::Color.Value {
         let clampedAlpha = min(1.0, max(0.0, alpha))
 
         switch self {
@@ -331,7 +331,7 @@ extension CSS_Standard.Color.Value {
         }
     }
 
-    public func adjustBrightness(by percent: Double) -> CSS_Standard.Color.Value {
+    public func adjustBrightness(by percent: Double) -> CSS_Standard::Color.Value {
         guard percent >= -1, percent <= 1 else { return self }
 
         func adjustComponent(_ value: Int) -> Int {
