@@ -5,7 +5,7 @@ import HTML_Rendering
 extension HTML.CSS {
     @inlinable
     @discardableResult
-    @CSS_HTML_Rendering.CSS.Builder
+    @CSS_HTML_Rendering::CSS.Builder
     public func border(
         _ border: Border?
     ) -> HTML.CSS<some HTML.View> {
@@ -76,7 +76,7 @@ extension HTML.CSS {
     public func border(
         _ sides: [Border.Side] = Border.Side.allCases,
         width: BorderWidth? = nil,
-        style: CSS_Standard.LineStyle? = .solid,
+        style: CSS_Standard::LineStyle? = .solid,
         color: DarkModeColor? = nil
     ) -> HTML.CSS<some HTML.View> {
         self.border(Border(sides: .init(sides), width: width, style: style, color: color))
@@ -88,7 +88,7 @@ extension HTML.CSS {
     public func border(
         _ sides: Border.Side...,
         width: BorderWidth? = nil,
-        style: CSS_Standard.LineStyle? = .solid,
+        style: CSS_Standard::LineStyle? = .solid,
         color: DarkModeColor? = nil
     ) -> HTML.CSS<some HTML.View> {
         self.border(Border(sides: .init(sides), width: width, style: style, color: color))
@@ -98,7 +98,7 @@ extension HTML.CSS {
 extension HTML.CSS {
 
     @usableFromInline
-    @CSS_HTML_Rendering.CSS.Builder
+    @CSS_HTML_Rendering::CSS.Builder
     func borderSidesView(
         sides: Swift.Set<Border.Side>,
         borderStyle: String,
@@ -199,7 +199,7 @@ extension HTML.CSS {
     @discardableResult
     public func borderTop(
         width: BorderWidth? = nil,
-        style: CSS_Standard.LineStyle? = .solid,
+        style: CSS_Standard::LineStyle? = .solid,
         color: DarkModeColor? = nil
     ) -> HTML.CSS<some HTML.View> {
         self.border([.top], width: width, style: style, color: color)
@@ -209,7 +209,7 @@ extension HTML.CSS {
     @discardableResult
     public func borderBottom(
         width: BorderWidth? = nil,
-        style: CSS_Standard.LineStyle? = .solid,
+        style: CSS_Standard::LineStyle? = .solid,
         color: DarkModeColor? = nil
     ) -> HTML.CSS<some HTML.View> {
         self.border([.bottom], width: width, style: style, color: color)
@@ -219,7 +219,7 @@ extension HTML.CSS {
     @discardableResult
     public func borderLeft(
         width: BorderWidth? = nil,
-        style: CSS_Standard.LineStyle? = .solid,
+        style: CSS_Standard::LineStyle? = .solid,
         color: DarkModeColor? = nil
     ) -> HTML.CSS<some HTML.View> {
         self.border([.left], width: width, style: style, color: color)
@@ -229,7 +229,7 @@ extension HTML.CSS {
     @discardableResult
     public func borderRight(
         width: BorderWidth? = nil,
-        style: CSS_Standard.LineStyle? = .solid,
+        style: CSS_Standard::LineStyle? = .solid,
         color: DarkModeColor? = nil
     ) -> HTML.CSS<some HTML.View> {
         self.border([.right], width: width, style: style, color: color)

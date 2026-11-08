@@ -4,7 +4,7 @@ import HTML_Rendering
 
 public enum ListStyle: Sendable {
     case reset
-    case cssPropertyTypesListStyle(CSS_Standard.ListStyle)
+    case cssPropertyTypesListStyle(CSS_Standard::ListStyle)
 }
 
 extension HTML.CSS {
@@ -12,11 +12,11 @@ extension HTML.CSS {
     @inlinable
     public func listStyle(
         _ listStyle: ListStyle
-    ) -> HTML.CSS<HTML.Styled<HTML.Styled<Base, CSS_Standard.ListStyle>, PaddingLeft>> {
+    ) -> HTML.CSS<HTML.Styled<HTML.Styled<Base, CSS_Standard::ListStyle>, PaddingLeft>> {
         switch listStyle {
         case .reset:
             self
-                .listStyle(CSS_Standard.ListStyle.none)
+                .listStyle(CSS_Standard::ListStyle.none)
                 .paddingLeft(.zero)
 
         case .cssPropertyTypesListStyle(let cssListStyle):

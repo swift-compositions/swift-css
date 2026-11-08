@@ -7,8 +7,8 @@ extension HTML.CSS {
     @inlinable
     @discardableResult
     public func frame(
-        width: CSS_Standard.Width? = nil,
-        height: CSS_Standard.Height? = nil,
+        width: CSS_Standard::Width? = nil,
+        height: CSS_Standard::Height? = nil,
         minWidth: MinWidth? = nil,
         minHeight: MinHeight? = nil,
         maxWidth: MaxWidth? = nil,
