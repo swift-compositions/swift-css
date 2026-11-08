@@ -146,7 +146,7 @@ extension HTML.View {
 
     @inlinable
     @HTML.Builder
-    package func applyBorderSide<P: W3C_CSS_Shared.Property>(
+    func applyBorderSide<P: W3C_CSS_Shared.Property>(
         shouldApply: Bool,
         property: P.Type,
         borderStyle: String,
