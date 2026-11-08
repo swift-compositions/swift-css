@@ -47,7 +47,7 @@ extension `CSS_Theming.Font.Defaults Tests` {
             CSS_Theming::Font.Defaults._prepare(snapshotA)
 
             await withTaskGroup(of: Void.self) { group in
-                for i in 0..<4_000 {
+                (0..<4_000).forEach { i in
                     group.addTask {
                         CSS_Theming::Font.Defaults._prepare(
                             i.isMultiple(of: 2) ? snapshotA : snapshotB

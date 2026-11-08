@@ -203,7 +203,7 @@ extension `Performance Tests` {
                 _ = try String(
                     HTML.Document {
                         tag("div") {
-                            for i in 0..<50 {
+                            (0..<50).forEach { i in
                                 tag("div")
                                     .attribute("id", "item-\(i)")
                             }
