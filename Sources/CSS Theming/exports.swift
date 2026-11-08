@@ -1,5 +1,5 @@
-@_exported import CSS
-@_exported import CSS_Standard
+@_exported public import CSS
+@_exported public import CSS_Standard
 
 public struct ThemingValues: Sendable {
     public var theme: DarkModeColor.Theme
