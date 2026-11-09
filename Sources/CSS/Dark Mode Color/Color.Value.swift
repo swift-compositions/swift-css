@@ -249,8 +249,20 @@ extension CSS_Standard::Color.Value {
         return adjustBrightness(by: percent)
     }
 
+    /// This color with alpha `alpha`, clamped to 0...1.
+    ///
+    /// Forms without known channels (named colors outside the basic 16, `hwb`,
+    /// `lab`, `color-mix()` and the like) become
+    /// `color-mix(in srgb, <color>, transparent <100 - alpha>%)`, which the
+    /// browser resolves to the same color at that alpha.
     public func opacity(_ alpha: Double) -> CSS_Standard::Color.Value {
         let clampedAlpha = min(1.0, max(0.0, alpha))
+        let transparentMix = CSS_Standard::Color.Value.mix(
+            .rectangular(.srgb),
+            self,
+            .transparent,
+            (1 - clampedAlpha) * 100
+        )
 
         switch self {
         case .rgb(let r, let g, let b):
@@ -270,18 +282,18 @@ extension CSS_Standard::Color.Value {
             if let rgb = namedColorToRgb(name) {
                 return .rgba(rgb.r, rgb.g, rgb.b, clampedAlpha)
             }
-            return self
+            return transparentMix
 
         case .hex(let hex):
 
             if let rgb = hexToRgb(hex.value) {
                 return .rgba(rgb.r, rgb.g, rgb.b, clampedAlpha)
             }
-            return self
+            return transparentMix
 
         default:
 
-            return self
+            return transparentMix
         }
     }
 
@@ -331,8 +343,21 @@ extension CSS_Standard::Color.Value {
         }
     }
 
+    /// This color moved toward white (`percent > 0`) or black (`percent < 0`)
+    /// by `percent`, clamped to -1...1: 1 is white, -1 is black.
+    ///
+    /// Forms without known channels (named colors outside the basic 16, `hwb`,
+    /// `lab`, `color-mix()` and the like) become
+    /// `color-mix(in srgb, <color>, white|black <percent>%)`, the same mix the
+    /// channel arithmetic performs.
     public func adjustBrightness(by percent: Double) -> CSS_Standard::Color.Value {
-        guard percent >= -1, percent <= 1 else { return self }
+        let percent = min(1, max(-1, percent))
+        let towardMix = CSS_Standard::Color.Value.mix(
+            .rectangular(.srgb),
+            self,
+            percent > 0 ? .named(.white) : .named(.black),
+            abs(percent) * 100
+        )
 
         func adjustComponent(_ value: Int) -> Int {
             guard percent > 0 else {
@@ -368,7 +393,7 @@ extension CSS_Standard::Color.Value {
                 let adjustedB = adjustComponent(rgb.b)
                 return .rgb(adjustedR, adjustedG, adjustedB)
             }
-            return self
+            return towardMix
 
         case .named(let name):
             if let rgb = namedColorToRgb(name) {
@@ -377,10 +402,10 @@ extension CSS_Standard::Color.Value {
                 let adjustedB = adjustComponent(rgb.b)
                 return .rgb(adjustedR, adjustedG, adjustedB)
             }
-            return self
+            return towardMix
 
         default:
-            return self
+            return towardMix
         }
     }
 }
