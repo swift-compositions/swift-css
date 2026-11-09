@@ -17,7 +17,9 @@ extension DarkModeColor.Theme.StyleSheet {
             throw .directoryCreationFailed(path: directory, reason: String(describing: error))
         }
 
-        let path = directory + "\(name).css"
+        let path = URL(fileURLWithPath: directory, isDirectory: true)
+            .appendingPathComponent("\(name).css")
+            .path
 
         do {
             try self.description.write(

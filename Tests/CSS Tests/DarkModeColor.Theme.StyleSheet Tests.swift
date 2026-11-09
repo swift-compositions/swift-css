@@ -1,5 +1,7 @@
 import CSS
 import CSS_Theming
+import CSS_Theming_Foundation_Integration
+import Foundation
 import Testing
 
 enum `DarkModeColor.Theme.StyleSheet Tests` {}
@@ -44,6 +46,25 @@ extension `DarkModeColor.Theme.StyleSheet Tests` {
             let expectedDark = theme.blue.dark.opacity(0.2).description
             #expect(css.contains("--color-blue-translucent: \(expectedLight);"))
             #expect(css.contains("--color-blue-translucent: \(expectedDark);"))
+        }
+    }
+}
+
+extension `DarkModeColor.Theme.StyleSheet Tests` {
+    @Suite
+    struct `Writing To A Directory` {
+
+        @Test
+        func `a directory without a trailing slash gets the file inside it`() throws {
+            let directory = FileManager.default.temporaryDirectory
+                .appendingPathComponent("swift-css-\(UUID().uuidString)")
+                .path
+            defer { try? FileManager.default.removeItem(atPath: directory) }
+
+            try DarkModeColor.Theme.default.stylesheet.write(to: directory, name: "theme")
+
+            #expect(FileManager.default.fileExists(atPath: directory + "/theme.css"))
+            #expect(!FileManager.default.fileExists(atPath: directory + "theme.css"))
         }
     }
 }

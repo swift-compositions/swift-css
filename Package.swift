@@ -100,6 +100,7 @@ let package = Package(
             dependencies: [
                 .target(name: "CSS"),
                 .target(name: "CSS Theming"),
+                .target(name: "CSS Theming Foundation Integration"),
             ],
             path: "Tests/CSS Tests"
         ),
