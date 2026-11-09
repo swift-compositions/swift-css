@@ -44,12 +44,6 @@ extension HTML.CSS {
             }
         }
 
-        else if top == nil && bottom == nil, let right, let left, right == left {
-            base.inlineStyle(
-                Margin.verticalHorizontal(.px(0), right)
-            )
-        }
-
         else {
             base
                 .inlineStyle(top.map { MarginTop.lengthPercentage($0) })
