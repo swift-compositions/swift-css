@@ -298,7 +298,7 @@ extension CSS_Standard::Color.Value {
     }
 
     private func hexToRgb(_ hex: String) -> (r: Int, g: Int, b: Int)? {
-        var cleaned = String(hex.trimmingPrefix("#"))
+        var cleaned = hex.hasPrefix("#") ? String(hex.dropFirst()) : hex
 
         if cleaned.count == 3 {
             cleaned = cleaned.map { "\($0)\($0)" }.joined()
